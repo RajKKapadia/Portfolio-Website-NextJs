@@ -3,12 +3,16 @@ import { Card, CardContent } from "@/components/ui/card"
 export function Skills() {
     const skillCategories = [
         {
+            title: "Large Language Model",
+            skills: ["Fine tuning", "Inference", "Agent Development"]
+        },
+        {
             title: "AI & Machine Learning",
             skills: ["Natural Language Processing", "Chatbot Development", "Deep Learning"]
         },
         {
             title: "Web Development",
-            skills: ["React/Next.js", "Node.js", "Python/Flask"]
+            skills: ["React/Next.js", "Node.js/Express", "Python/Flask"]
         },
         {
             title: "Cloud & DevOps",

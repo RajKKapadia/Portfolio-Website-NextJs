@@ -32,8 +32,8 @@ export function Contact() {
   const contactLinks = [
     {
       icon: Mail,
-      href: "mailto:rajkkapadia@gmail.com",
-      text: "rajkkapadia@gmail.com"
+      href: "mailto:raajforyou@gmail.com",
+      text: "raajforyou@gmail.com"
     },
     {
       icon: Youtube,
