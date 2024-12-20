@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { FileDown, Github, Mail } from "lucide-react"
+import { FileDown, Mail } from "lucide-react"
 import Image from "next/image"
+import { GithubIcon } from "../icons"
 
 export function Hero() {
     return (
@@ -18,7 +19,7 @@ export function Hero() {
                         </Button>
                         <Button variant="outline" asChild>
                             <a href="https://github.com/RajKKapadia" target="_blank" rel="noopener noreferrer">
-                                <Github className="mr-2 h-4 w-4" />
+                                <GithubIcon className="mr-2 h-4 w-4" />
                                 GitHub
                             </a>
                         </Button>

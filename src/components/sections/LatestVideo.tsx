@@ -37,16 +37,16 @@ const FALLBACK_VIDEOS: YouTubeVideo[] = [
         likes: "198",
         publishedAt: "2 weeks ago"
     }
-];
+]
 
 const fetcher = async () => {
     try {
-        return await getLatestVideos();
+        return await getLatestVideos()
     } catch (error) {
-        console.error('Failed to fetch videos:', error);
-        return FALLBACK_VIDEOS;
+        console.error('Failed to fetch videos:', error)
+        return FALLBACK_VIDEOS
     }
-};
+}
 
 export function LatestVideo() {
     const { data: videos, error, isLoading } = useSWR<YouTubeVideo[]>('youtube-videos', fetcher, {
@@ -70,7 +70,7 @@ export function LatestVideo() {
         }
     }, [emblaApi, videos])
 
-    const displayVideos = videos || [];
+    const displayVideos = videos || []
 
     return (
         <section className="container mx-auto px-4 py-20 bg-white dark:bg-neutral-900">

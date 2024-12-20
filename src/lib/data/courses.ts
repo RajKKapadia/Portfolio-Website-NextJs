@@ -1,12 +1,12 @@
 export interface Course {
-    id: string;
-    title: string;
-    description: string;
-    image: string;
-    url: string;
-    students: number;
-    rating: number;
-    reviews: number;
+    id: string
+    title: string
+    description: string
+    image: string
+    url: string
+    students: number
+    rating: number
+    reviews: number
 }
 
 export const courses: Course[] = [
@@ -20,4 +20,4 @@ export const courses: Course[] = [
         rating: 4.7,
         reviews: 4
     }
-];
+]

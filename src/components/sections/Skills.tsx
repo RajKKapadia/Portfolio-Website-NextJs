@@ -12,7 +12,7 @@ export function Skills() {
         },
         {
             title: "Web Development",
-            skills: ["React/Next.js", "Node.js/Express", "Python/Flask"]
+            skills: ["Node.js/Express", "Python/Flask", "React/Next.js"]
         },
         {
             title: "Cloud & DevOps",

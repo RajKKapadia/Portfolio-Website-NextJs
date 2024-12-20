@@ -1,18 +1,18 @@
-"use client";
+"use client"
 
-import { Card, CardContent } from "@/components/ui/card";
-import { courses } from "@/lib/data/courses";
-import { Star, Users } from "lucide-react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { Card, CardContent } from "@/components/ui/card"
+import { courses } from "@/lib/data/courses"
+import { Star, Users } from "lucide-react"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
 
 export function Courses() {
     const { ref, inView } = useInView({
         triggerOnce: true,
         threshold: 0.1,
-    });
+    })
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -22,7 +22,7 @@ export function Courses() {
                 staggerChildren: 0.2,
             },
         },
-    };
+    }
 
     const cardVariants = {
         hidden: { y: 50, opacity: 0 },
@@ -35,7 +35,7 @@ export function Courses() {
                 damping: 12,
             },
         },
-    };
+    }
 
     return (
         <section className="container mx-auto px-4 py-20">
@@ -98,5 +98,5 @@ export function Courses() {
                 ))}
             </motion.div>
         </section>
-    );
+    )
 }
