@@ -8,15 +8,15 @@ export function Skills() {
         },
         {
             title: "AI & Machine Learning",
-            skills: ["Natural Language Processing", "Chatbot Development", "Deep Learning"]
+            skills: ["Computer Vision", "Natural Language Processing", "Chatbot Development (Dialogflow/Openai/LLMs)", "Deep Learning"]
         },
         {
             title: "Web Development",
-            skills: ["Node.js/Express", "Python/Flask", "React/Next.js"]
+            skills: ["Node.js/Express (JavaScript/TypeScript)", "Python/Flask", "React/Next.js"]
         },
         {
             title: "Cloud & DevOps",
-            skills: ["AWS", "Docker", "GCP"]
+            skills: ["AWS", "GCP", "Docker"]
         }
     ]
 
