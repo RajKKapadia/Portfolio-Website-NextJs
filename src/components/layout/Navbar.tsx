@@ -1,21 +1,22 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react"
+import { Menu, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/layout/ThemeToggle"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
 
     const navItems = [
         { href: "#about", label: "About" },
         { href: "#skills", label: "Skills" },
         { href: "#videos", label: "Videos" },
         { href: "#courses", label: "Courses" },
+        { href: "#projects", label: "Projects" },
         { href: "#contact", label: "Contact" },
-    ];
+    ]
 
     const menuVariants = {
         closed: {
@@ -31,7 +32,7 @@ export function Navbar() {
                 damping: 30,
             },
         },
-    };
+    }
 
     return (
         <motion.nav
@@ -117,5 +118,5 @@ export function Navbar() {
                 )}
             </AnimatePresence>
         </motion.nav>
-    );
+    )
 }

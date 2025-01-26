@@ -4,6 +4,7 @@ import { Skills } from "@/components/sections/Skills"
 import { LatestVideo } from "@/components/sections/LatestVideo"
 import { Contact } from "@/components/sections/Contact"
 import { Courses } from "@/components/sections/Courses"
+import { Projects } from "@/components/sections/Projects"
 
 export default function Home() {
   return (
@@ -15,6 +16,9 @@ export default function Home() {
       <section id="skills">
         <Skills />
       </section>
+      {/* <section id="projects">
+        <Projects />
+      </section> */}
       <section id="videos">
         <LatestVideo />
       </section>

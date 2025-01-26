@@ -1,41 +1,61 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { FileText, Mail, Send } from "lucide-react"
-import { useState, FormEvent } from "react"
+import { useTransition } from "react"
 import { YoutubeIcno } from "../icons"
+import { z } from "zod"
+import { useForm } from "react-hook-form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
+import { toast } from "@/hooks/use-toast"
+import { sendTelegramMessage } from "@/lib/telegram"
+
+export const inquiryFormSchema = z.object({
+  name: z.string().min(1, "Required"),
+  email: z.string().email().min(1, "Required"),
+  subject: z.string(),
+  message: z.string().optional()
+})
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
+  const [isPending, startTransition] = useTransition()
+  const form = useForm<z.infer<typeof inquiryFormSchema>>({
+    resolver: zodResolver(inquiryFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: ""
+    }
   })
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // Handle form submission logic here
-    console.log("Form submitted:", formData)
+  function onSubmit(values: z.infer<typeof inquiryFormSchema>) {
+    startTransition(async () => {
+      const telegramMessage = `**Name:** ${values.name}
+**Email:** ${values.email}
+**Subject:** ${values.subject}
+**Message:** ${values.message}`
+      const data = await sendTelegramMessage(telegramMessage)
+      if (data.status) {
+        toast({
+          title: "Success",
+          description: data.message,
+          variant: "default"
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: data.message,
+          variant: "destructive"
+        })
+      }
+    })
+    form.reset()
   }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  // Convert SVG to icon components
-  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg> // YouTube
-
-
-
-
 
   const contactLinks = [
     {
@@ -84,53 +104,71 @@ export function Contact() {
 
         <Card className="order-1 md:order-2">
           <CardContent className="pt-6">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Input
-                  type="text"
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
+                <FormField
+                  control={form.control}
                   name="name"
-                  placeholder="Your Name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="space-y-2">
-                <Input
-                  type="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Your name"></Input>
+                      </FormControl>
+                      <FormMessage></FormMessage>
+                    </FormItem>
+                  )}
+                ></FormField>
+
+                <FormField
+                  control={form.control}
                   name="email"
-                  placeholder="Your Email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="space-y-2">
-                <Input
-                  type="text"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Your valid email address"></Input>
+                      </FormControl>
+                      <FormMessage></FormMessage>
+                    </FormItem>
+                  )}
+                ></FormField>
+
+                <FormField
+                  control={form.control}
                   name="subject"
-                  placeholder="Subject"
-                  required
-                  value={formData.subject}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="space-y-2">
-                <Textarea
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Subject</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="What is the matter?"></Input>
+                      </FormControl>
+                      <FormMessage></FormMessage>
+                    </FormItem>
+                  )}
+                ></FormField>
+
+                <FormField
+                  control={form.control}
                   name="message"
-                  placeholder="Your Message"
-                  className="min-h-[150px] resize-none"
-                  required
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={5}
-                />
-              </div>
-              <Button type="submit" className="w-full">
-                <Send className="mr-2 h-4 w-4" />
-                Send Message
-              </Button>
-            </form>
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea {...field} className="resize-none h-32" placeholder="Any message for me?"></Textarea>
+                      </FormControl>
+                      <FormMessage></FormMessage>
+                    </FormItem>
+                  )}
+                ></FormField>
+
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  <Send className="mr-2 h-4 w-4" />
+                  Send Message
+                </Button>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </div>
