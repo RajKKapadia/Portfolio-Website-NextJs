@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Calendar, FileText, Mail, Send } from "lucide-react"
+import { BriefcaseBusiness, Calendar, Factory, Mail, Send } from "lucide-react"
 import { useTransition } from "react"
 import { YoutubeIcno } from "../icons"
 import { z } from "zod"
@@ -69,12 +69,12 @@ export function Contact() {
       text: "YouTube Channel"
     },
     {
-      icon: FileText,
+      icon: BriefcaseBusiness,
       href: "https://www.upwork.com/freelancers/~0176aeacfcff7f1fc2?viewMode=1",
       text: "Upwork Profile"
     },
     {
-      icon: FileText,
+      icon: Factory,
       href: "https://www.fiverr.com/rajkkapadia",
       text: "Fiverr Profile"
     },
