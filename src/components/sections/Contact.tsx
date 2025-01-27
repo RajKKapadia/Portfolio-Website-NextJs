@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { FileText, Mail, Send } from "lucide-react"
+import { Calendar, FileText, Mail, Send } from "lucide-react"
 import { useTransition } from "react"
 import { YoutubeIcno } from "../icons"
 import { z } from "zod"
@@ -77,6 +77,11 @@ export function Contact() {
       icon: FileText,
       href: "https://www.fiverr.com/rajkkapadia",
       text: "Fiverr Profile"
+    },
+    {
+      icon: Calendar,
+      href: "https://project-easy-meet.vercel.app/book/user_2rWmQLgVF13473zu2Mir3l0Yefx/fcf110c4-d28f-44d4-9d40-6e35f2a7f070",
+      text: "Book Appointment"
     }
   ]
 
