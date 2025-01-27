@@ -6,11 +6,11 @@ import { GithubIcon } from "../icons"
 export function Hero() {
     return (
         <section className="container mx-auto px-4 py-20">
-            <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
-                <div className="flex-1 space-y-6">
-                    <h1 className="text-4xl md:text-6xl font-bold">Raj Kapadia</h1>
+            <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-8">
+                <div className="flex-grow space-y-6">
+                    <h1 className="text-4xl md:text-6xl font-bold text-center md:text-left">Raj Kapadia</h1>
                     <p className="text-xl text-neutral-600 dark:text-neutral-400">Senior Software Developer & AI Expert</p>
-                    <div className="flex gap-4">
+                    <div className="md:flex md:gap-2 grid gap-2">
                         <Button asChild>
                             <a href="mailto:rajkkapadia@gmail.com">
                                 <Mail className="mr-2 h-4 w-4" />
