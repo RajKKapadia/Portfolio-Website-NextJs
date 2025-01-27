@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/layout/ThemeToggle"
 import { motion, AnimatePresence } from "framer-motion"
+import Link from "next/link"
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -49,7 +50,7 @@ export function Navbar() {
                         transition={{ delay: 0.2 }}
                         className="text-xl font-bold"
                     >
-                        Raj Kapadia
+                        <Link href={"/"}>Raj Kapadia</Link>
                     </motion.span>
 
                     <div className="hidden md:flex items-center gap-6">
