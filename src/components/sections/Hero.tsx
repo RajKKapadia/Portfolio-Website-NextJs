@@ -12,9 +12,9 @@ export function Hero() {
                     <p className="text-xl text-neutral-600 dark:text-neutral-400">Senior Software Developer & AI Expert</p>
                     <div className="md:flex md:gap-2 grid gap-2">
                         <Button asChild>
-                            <a href="mailto:rajkkapadia@gmail.com">
+                            <a href="https://project-easy-meet.vercel.app/book/user_2rWmQLgVF13473zu2Mir3l0Yefx/fcf110c4-d28f-44d4-9d40-6e35f2a7f070">
                                 <Mail className="mr-2 h-4 w-4" />
-                                Contact Me
+                                Book Appointment
                             </a>
                         </Button>
                         <Button variant="outline" asChild>
