@@ -61,7 +61,7 @@ export function Contact() {
     {
       icon: Mail,
       href: "mailto:raajforyou@gmail.com",
-      text: "raajforyou@gmail.com"
+      text: "Send Email"
     },
     {
       icon: YoutubeIcno,
