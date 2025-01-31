@@ -1,12 +1,12 @@
 export const config = {
   youtube: {
-    apiKey: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || "",
+    apiKey: process.env.YOUTUBE_API_KEY || "",
     channelId: "UCOT01XvBSj12xQsANtTeAcQ",
     maxResults: 10
   },
   telegram: {
-    botToken: process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN || "",
-    chatId: process.env.NEXT_PUBLIC_CHAT_ID || ""
+    botToken: process.env.TELEGRAM_BOT_TOKEN || "",
+    chatId: process.env.CHAT_ID || ""
   }
 } as const
 

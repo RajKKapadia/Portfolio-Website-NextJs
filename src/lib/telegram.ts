@@ -16,11 +16,10 @@ interface TelegramResponse {
     description?: string
 }
 
-export const sendTelegramMessage = async (message: string): Promise<{ status: boolean, message: string }> => {
+export const sendTelegramMessage = async ({ message }: { message: string }): Promise<{ status: boolean, message: string }> => {
     const { isValid, missingEnvVars } = validateConfig()
     if (!isValid) {
         console.error("Missing Telegram API key.")
-        console.log(missingEnvVars)
         return {
             status: false,
             message: "We are facing an issue sending the message."
@@ -35,8 +34,7 @@ export const sendTelegramMessage = async (message: string): Promise<{ status: bo
             },
             body: JSON.stringify({
                 chat_id: config.telegram.chatId,
-                text: message,
-                parse_mode: "Markdown"
+                text: message
             }),
         })
         const result: TelegramResponse = (await response.json()) as TelegramResponse
@@ -64,3 +62,5 @@ export const sendTelegramMessage = async (message: string): Promise<{ status: bo
         }
     }
 }
+
+sendTelegramMessage({ message: "Test message." })

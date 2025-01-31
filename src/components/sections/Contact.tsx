@@ -35,11 +35,8 @@ export function Contact() {
 
   function onSubmit(values: z.infer<typeof inquiryFormSchema>) {
     startTransition(async () => {
-      const telegramMessage = `**Name:** ${values.name}
-**Email:** ${values.email}
-**Subject:** ${values.subject}
-**Message:** ${values.message}`
-      const data = await sendTelegramMessage(telegramMessage)
+      const telegramMessage = `*Name:* ${values.name}\n*Email:* ${values.email}\n*Subject:* ${values.subject || "No subject"}\n*Message:* ${values.message || "No message"}`
+      const data = await sendTelegramMessage({ message: telegramMessage })
       if (data.status) {
         toast({
           title: "Success",
