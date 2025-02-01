@@ -62,5 +62,3 @@ export const sendTelegramMessage = async ({ message }: { message: string }): Pro
         }
     }
 }
-
-sendTelegramMessage({ message: "Test message." })
