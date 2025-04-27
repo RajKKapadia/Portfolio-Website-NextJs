@@ -12,7 +12,7 @@ export function Hero() {
                     <p className="text-xl text-neutral-600 dark:text-neutral-400">Senior Software Developer & AI Expert</p>
                     <div className="md:flex md:gap-2 grid gap-2">
                         <Button asChild>
-                            <a href="https://project-easy-meet.vercel.app/book/user_2rWmQLgVF13473zu2Mir3l0Yefx/fcf110c4-d28f-44d4-9d40-6e35f2a7f070" target="_blank" rel="noopener noreferrer">
+                            <a href="https://topmate.io/raj_kapadia/522909" target="_blank" rel="noopener noreferrer">
                                 <Mail className="mr-2 h-4 w-4" />
                                 Book Appointment
                             </a>
