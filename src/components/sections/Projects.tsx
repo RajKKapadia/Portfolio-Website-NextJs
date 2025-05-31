@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Skeleton } from "../ui/skeleton"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
+import useEmblaCarousel from 'embla-carousel-react'
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 
 interface PreviewData {
@@ -103,6 +105,22 @@ export function Projects() {
         threshold: 0.1,
     })
 
+    const [emblaRef, emblaApi] = useEmblaCarousel({
+        loop: true,
+        dragFree: true,
+        containScroll: "trimSnaps",
+        align: "start",
+    })
+
+    const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
+    const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
+
+    useEffect(() => {
+        if (emblaApi) {
+            emblaApi.reInit()
+        }
+    }, [emblaApi, projects])
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -128,24 +146,45 @@ export function Projects() {
 
     return (
         <section className="container mx-auto px-4 py-20">
-            <motion.h2
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-3xl font-bold mb-8"
-            >
-                Projects
-            </motion.h2>
-            <motion.div
-                ref={ref}
-                variants={containerVariants}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            >
-                {projects.map((project) => (
-                    <motion.div key={project.id} variants={cardVariants}>
-                        <Card className="overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+            <div className="flex justify-between items-center mb-8">
+                <motion.h2
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-3xl font-bold"
+                >
+                    Projects
+                </motion.h2>
+                <div className="flex gap-2">
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={scrollPrev}
+                        className="hidden md:flex"
+                    >
+                        <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={scrollNext}
+                        className="hidden md:flex"
+                    >
+                        <ChevronRight className="h-4 w-4" />
+                    </Button>
+                </div>
+            </div>
+            <div className="overflow-hidden" ref={emblaRef}>
+                <motion.div
+                    ref={ref}
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={inView ? "visible" : "hidden"}
+                    className="flex -ml-4"
+                >
+                    {projects.map((project) => (
+                        <motion.div key={project.id} variants={cardVariants} className="flex-[0_0_83.333333%] pl-4 md:flex-[0_0_50%] lg:flex-[0_0_33.333333%]">
+                        <Card className="overflow-hidden group hover:shadow-lg transition-shadow duration-300 h-full justify-evenly flex flex-col border-white border-2">
                             <div className="relative aspect-video overflow-hidden">
                                 <WebsitePreview url={project.url} />
                             </div>
@@ -173,8 +212,9 @@ export function Projects() {
                             </CardContent>
                         </Card>
                     </motion.div>
-                ))}
-            </motion.div>
+                    ))}
+                </motion.div>
+            </div>
         </section>
     )
 }
