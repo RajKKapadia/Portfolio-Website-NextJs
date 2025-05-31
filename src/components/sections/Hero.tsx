@@ -17,13 +17,13 @@ export function Hero() {
                                 Book Appointment
                             </a>
                         </Button>
-                        <Button variant="outline" asChild>
+                        <Button asChild>
                             <a href="https://github.com/RajKKapadia" target="_blank" rel="noopener noreferrer">
                                 <GithubIcon className="mr-2 h-4 w-4" />
                                 GitHub
                             </a>
                         </Button>
-                        <Button variant="outline" asChild>
+                        <Button asChild>
                             <a href="/RajKapadia.pdf" download="RajKapadia-AIML-7-Years.pdf">
                                 <FileDown className="mr-2 h-4 w-4" />
                                 Download Resume
