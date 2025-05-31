@@ -17,6 +17,14 @@ export function Skills() {
         {
             title: "Cloud & DevOps",
             skills: ["AWS", "GCP", "Docker"]
+        },
+        {
+            title: "Telegram Bot development",
+            skills: ["Python (python-telegram-bot/aiogram)", "TypeScript (telegraf/grammy)"]
+        },
+        {
+            title: "NextJs",
+            skills: ["TypeScript", "Drizzle/Prisma", "Shadcn", "TailwindCSS"]
         }
     ]
 
