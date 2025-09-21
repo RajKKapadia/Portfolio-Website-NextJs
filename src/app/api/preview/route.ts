@@ -72,9 +72,6 @@ export async function GET(request: Request) {
                 null,
             image
         }
-
-        console.log('Preview data:', preview);
-
         return NextResponse.json(preview)
     } catch (error) {
         console.error('Preview fetch error:', error)
