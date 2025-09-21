@@ -8,6 +8,13 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        id: "ai-chat-stack",
+        title: "AI Chat Stack",
+        description: "Connect your knowledge to conversations with a clean, simple flow.",
+        url: "https://aichatstack.com",
+        technology: "NextJs, Drizzle, Shadcn, TailwindCSS"
+    },
+    {
         id: "habit-tracker",
         title: "Habit Tracker Telegram Bot",
         description: "Track daily habits with reminders and weekly summaries.",
