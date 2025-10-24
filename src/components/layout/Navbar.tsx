@@ -11,12 +11,12 @@ export function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
 
     const navItems = [
-        { href: "#about", label: "About" },
-        { href: "#skills", label: "Skills" },
-        { href: "#projects", label: "Projects" },
-        { href: "#videos", label: "Videos" },
-        { href: "#courses", label: "Courses" },
-        { href: "#contact", label: "Contact" },
+        { href: "/#about", label: "About" },
+        { href: "/#skills", label: "Skills" },
+        { href: "/#projects", label: "Projects" },
+        { href: "/#videos", label: "Videos" },
+        { href: "/#courses", label: "Courses" },
+        { href: "/#contact", label: "Contact" },
     ]
 
     const menuVariants = {

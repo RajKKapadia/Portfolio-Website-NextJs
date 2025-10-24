@@ -7,6 +7,12 @@ export const config = {
   telegram: {
     botToken: process.env.TELEGRAM_BOT_TOKEN || "",
     chatId: process.env.CHAT_ID || ""
+  },
+  googleSheets: {
+    spreadsheetId: process.env.GOOGLE_SHEET_ID || "",
+    serviceAccountJson: process.env.GCP_SERVICE_ACCOUNT_JSON || "",
+    resourcesSheet: "Code Data",
+    leadsSheet: "Leads"
   }
 } as const
 
@@ -14,15 +20,23 @@ export function validateConfig() {
   const missingEnvVars: string[] = []
 
   if (!config.youtube.apiKey) {
-    missingEnvVars.push("NEXT_PUBLIC_YOUTUBE_API_KEY")
+    missingEnvVars.push("YOUTUBE_API_KEY")
   }
 
-  if (!config.youtube.apiKey) {
-    missingEnvVars.push("NEXT_PUBLIC_TELEGRAM_BOT_TOKEN")
+  if (!config.telegram.botToken) {
+    missingEnvVars.push("TELEGRAM_BOT_TOKEN")
   }
 
-  if (!config.youtube.apiKey) {
+  if (!config.telegram.chatId) {
     missingEnvVars.push("CHAT_ID")
+  }
+
+  if (!config.googleSheets.spreadsheetId) {
+    missingEnvVars.push("GOOGLE_SHEET_ID")
+  }
+
+  if (!config.googleSheets.serviceAccountJson) {
+    missingEnvVars.push("GCP_SERVICE_ACCOUNT_JSON")
   }
 
   return {

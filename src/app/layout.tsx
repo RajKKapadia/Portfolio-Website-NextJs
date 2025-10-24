@@ -19,6 +19,11 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: 'Raj Kapadia - Senior Software Developer & AI Expert',
   description: 'Portfolio website of Raj Kapadia, showcasing expertise in AI/ML, chatbots, and full-stack development.',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
 }
 
 export default function RootLayout({
