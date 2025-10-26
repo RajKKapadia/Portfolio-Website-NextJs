@@ -5,7 +5,7 @@ import { projects } from "@/lib/data/projects"
 import { AlertCircle, Cpu, Globe } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Skeleton } from "../ui/skeleton"
 import { useEffect, useState, useCallback } from "react"
@@ -131,7 +131,7 @@ export function Projects() {
         },
     }
 
-    const cardVariants = {
+    const cardVariants: Variants = {
         hidden: { y: 50, opacity: 0 },
         visible: {
             y: 0,
@@ -184,34 +184,34 @@ export function Projects() {
                 >
                     {projects.map((project) => (
                         <motion.div key={project.id} variants={cardVariants} className="flex-[0_0_83.333333%] pl-4 md:flex-[0_0_50%] lg:flex-[0_0_33.333333%]">
-                        <Card className="overflow-hidden group hover:shadow-lg transition-shadow duration-300 h-full justify-evenly flex flex-col border-white border-2">
-                            <div className="relative aspect-video overflow-hidden">
-                                <WebsitePreview url={project.url} />
-                            </div>
-                            <CardContent className="p-6">
-                                <h3 className="text-xl font-semibold mb-2 line-clamp-2">
-                                    {project.title}
-                                </h3>
-                                <p className="text-muted-foreground mb-4 line-clamp-2">
-                                    {project.description}
-                                </p>
-                                <div className="flex items-center gap-4 mb-4">
-                                    <div className="flex items-center gap-1">
-                                        <Cpu className="w-4 h-4" />
-                                        <span>{project.technology}</span>
-                                    </div>
+                            <Card className="overflow-hidden group hover:shadow-lg transition-shadow duration-300 h-full justify-evenly flex flex-col border-white border-2">
+                                <div className="relative aspect-video overflow-hidden">
+                                    <WebsitePreview url={project.url} />
                                 </div>
-                                <Button
-                                    asChild
-                                    className="w-full transform hover:scale-[1.02] transition-transform duration-200"
-                                >
-                                    <a href={project.url} target="_blank" rel="noopener noreferrer">
-                                        Check it out!
-                                    </a>
-                                </Button>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
+                                <CardContent className="p-6">
+                                    <h3 className="text-xl font-semibold mb-2 line-clamp-2">
+                                        {project.title}
+                                    </h3>
+                                    <p className="text-muted-foreground mb-4 line-clamp-2">
+                                        {project.description}
+                                    </p>
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <div className="flex items-center gap-1">
+                                            <Cpu className="w-4 h-4" />
+                                            <span>{project.technology}</span>
+                                        </div>
+                                    </div>
+                                    <Button
+                                        asChild
+                                        className="w-full transform hover:scale-[1.02] transition-transform duration-200"
+                                    >
+                                        <a href={project.url} target="_blank" rel="noopener noreferrer">
+                                            Check it out!
+                                        </a>
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        </motion.div>
                     ))}
                 </motion.div>
             </div>

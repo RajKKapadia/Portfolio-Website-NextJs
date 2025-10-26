@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/layout/ThemeToggle"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, Variants } from "framer-motion"
 import Link from "next/link"
 
 export function Navbar() {
@@ -19,7 +19,7 @@ export function Navbar() {
         { href: "/#contact", label: "Contact" },
     ]
 
-    const menuVariants = {
+    const menuVariants: Variants = {
         closed: {
             opacity: 0,
             height: 0,
@@ -93,11 +93,11 @@ export function Navbar() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        variants={menuVariants}
                         initial="closed"
                         animate="open"
                         exit="closed"
                         className="md:hidden border-t overflow-hidden"
+                        variants={menuVariants}
                     >
                         <div className="container mx-auto px-4 py-4 space-y-2">
                             {navItems.map((item, index) => (

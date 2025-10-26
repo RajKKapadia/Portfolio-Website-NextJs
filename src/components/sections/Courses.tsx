@@ -5,7 +5,7 @@ import { courses } from "@/lib/data/courses"
 import { Star, Users } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 
 export function Courses() {
@@ -24,7 +24,7 @@ export function Courses() {
         },
     }
 
-    const cardVariants = {
+    const cardVariants: Variants = {
         hidden: { y: 50, opacity: 0 },
         visible: {
             y: 0,
