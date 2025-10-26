@@ -21,10 +21,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${resource.title} - Free Resource`,
-    description: resource.description,
     openGraph: {
       title: resource.title,
-      description: resource.description,
       images: [resource.thumbnailUrl],
     },
   }

@@ -11,7 +11,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { toast } from "@/hooks/use-toast"
 import { Resource } from "@/lib/sheets"
-import { CheckCircle2, Code2, Youtube } from "lucide-react"
+import { CheckCircle2, Code2 } from "lucide-react"
+import { YoutubeIcno } from "../icons"
 
 interface ResourceLandingProps {
   resource: Resource
@@ -98,9 +99,6 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                 {resource.title}
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {resource.description}
-              </p>
             </div>
 
             {/* Features */}
@@ -125,16 +123,6 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
                 </div>
               </div>
             </div>
-
-            {/* Watch Video CTA */}
-            {resource.youtubeUrl && (
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-                <a href={resource.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                  <Youtube className="mr-2 h-5 w-5" />
-                  Watch Tutorial Video
-                </a>
-              </Button>
-            )}
           </div>
 
           {/* Right Side - Form */}
@@ -218,7 +206,7 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
                       {resource.youtubeUrl && (
                         <Button asChild variant="outline" className="w-full" size="lg">
                           <a href={resource.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                            <Youtube className="mr-2 h-5 w-5" />
+                            <YoutubeIcno className="mr-2 h-5 w-5" />
                             Watch Tutorial
                           </a>
                         </Button>

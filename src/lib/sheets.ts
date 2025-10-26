@@ -2,6 +2,7 @@
 
 import { google } from "googleapis"
 import { config } from "./config"
+import { convertGoogleDriveUrl } from "./utils"
 
 export interface Resource {
   id: string
@@ -50,7 +51,7 @@ export async function getAllResources(): Promise<Resource[]> {
     const rows = response.data.values || []
 
     return rows.map((row) => ({
-      thumbnailUrl: row[0] || "",
+      thumbnailUrl: convertGoogleDriveUrl(row[0] || ""),
       title: row[1] || "",
       description: row[2] || "",
       codeUrl: row[3] || "",
