@@ -8,7 +8,7 @@ import { Projects } from "@/components/sections/Projects"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 pt-16">
+    <main className="min-h-screen bg-linear-to-b from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 pt-16">
       <Hero />
       <section id="about">
         <About />
