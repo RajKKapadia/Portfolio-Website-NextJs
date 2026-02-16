@@ -7,7 +7,7 @@ export function Hero() {
     return (
         <section className="container mx-auto px-4 py-20">
             <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-8">
-                <div className="flex-grow space-y-6">
+                <div className="grow space-y-6">
                     <h1 className="text-4xl md:text-6xl font-bold text-center md:text-left">Raj Kapadia</h1>
                     <p className="text-xl text-neutral-600 dark:text-neutral-400">AI/ML Team Lead | LLM Specialist | Full-Stack Developer</p>
                     <p className="text-md text-neutral-500 dark:text-neutral-500">7+ Years of Experience | 100+ Chatbots Built | Part-time YouTuber</p>
@@ -25,7 +25,7 @@ export function Hero() {
                             </a>
                         </Button>
                         <Button asChild>
-                            <a href="/RajKapadia.pdf" download="RajKapadia-AIML-7-Years.pdf">
+                            <a href="/RajKapadia.pdf" download="RajKapadia-8-Years.pdf">
                                 <FileDown className="mr-2 h-4 w-4" />
                                 Download Resume
                             </a>
