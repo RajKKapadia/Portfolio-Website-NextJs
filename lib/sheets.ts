@@ -49,13 +49,15 @@ export async function getAllResources(): Promise<Resource[]> {
 
     const rows = response.data.values || []
 
-    return rows.map((row) => ({
-      thumbnailUrl: convertGoogleDriveUrl(row[0] || ""),
-      title: row[1] || "",
-      codeUrl: row[2] || "",
-      youtubeUrl: row[3] || "",
-      id: row[4] || "",
-    }))
+    return rows
+      .map((row) => ({
+        thumbnailUrl: convertGoogleDriveUrl(row[0] || ""),
+        title: row[1] || "",
+        codeUrl: row[2] || "",
+        youtubeUrl: row[3] || "",
+        id: row[4] || "",
+      }))
+      .reverse()
   } catch (error) {
     console.error("Error fetching resources from Google Sheets:", error)
     return []
