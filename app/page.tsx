@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero"
+import { BusinessServices } from "@/components/sections/BusinessServices"
 import { About } from "@/components/sections/About"
 import { Skills } from "@/components/sections/Skills"
 import { LatestVideo } from "@/components/sections/LatestVideo"
@@ -10,6 +11,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-linear-to-b from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 pt-16">
       <Hero />
+      <section id="services">
+        <BusinessServices />
+      </section>
       <section id="about">
         <About />
       </section>
