@@ -16,9 +16,9 @@ export const courses: Course[] = [
         description: "Learn to build chatbots using the Dialogflow ES, supported by Python.",
         image: "/courses/dialogflow-es.png",
         url: "https://www.udemy.com/course/master-google-dialogflow-build-smart-chatbots",
-        students: 62,
+        students: 70,
         rating: 4.6,
-        reviews: 14
+        reviews: 16
     },
     {
         id: "dialogflow-cx-course",
@@ -26,8 +26,8 @@ export const courses: Course[] = [
         description: "Learn to build chatbots using the Dialogflow CX, supported by Python and FastAPI.",
         image: "/courses/dialogflow-cx.png",
         url: "https://www.udemy.com/course/master-dialogflow-cx-build-engaging-chatbots-2025",
-        students: 1132,
-        rating: 4.4,
-        reviews: 16
+        students: 1206,
+        rating: 4.2,
+        reviews: 33
     }
 ]
