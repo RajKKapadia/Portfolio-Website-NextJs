@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { toast } from "sonner"
-import { Resource } from "@/lib/sheets"
+import type { Resource } from "@/lib/sheets"
 import { CheckCircle2, Code2 } from "lucide-react"
 import { YoutubeIcno } from "../icons"
 
@@ -61,7 +61,7 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
         } else {
           toast.error(data.message || "Failed to process your request.",)
         }
-      } catch (error) {
+      } catch {
         toast.error("Something went wrong. Please try again.",)
       }
     })
@@ -81,6 +81,7 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
                 fill
                 className="object-cover"
                 priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
               />
             </div>
 

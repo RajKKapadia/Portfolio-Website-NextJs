@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "Browse and download free resources including source code, project files, and tutorial assets.",
 }
 
+export const revalidate = 3600
+
 export default async function ResourcesPage() {
   const resources = await getAllResources()
 

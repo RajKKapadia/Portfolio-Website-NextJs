@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getResourceById } from "@/lib/sheets"
+import { getAllResources, getResourceById } from "@/lib/sheets"
 import ResourceLanding from "@/components/sections/ResourceLanding"
 import type { Metadata } from "next"
 
@@ -7,6 +7,16 @@ interface PageProps {
   params: Promise<{
     id: string
   }>
+}
+
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+  const resources = await getAllResources()
+
+  return resources.map((resource) => ({
+    id: resource.id,
+  }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

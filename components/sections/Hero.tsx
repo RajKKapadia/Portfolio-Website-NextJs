@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { FileDown, Mail } from "lucide-react"
 import Image from "next/image"
+import avatarImage from "@/public/avatar.jpeg"
 import { GithubIcon } from "../icons"
 
 export function Hero() {
@@ -34,10 +35,13 @@ export function Hero() {
                 </div>
                 <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden">
                     <Image
-                        src="/avatar.jpeg"
-                        alt="Profile"
+                        src={avatarImage}
+                        alt="Raj Kapadia portrait"
                         fill
                         className="object-cover"
+                        sizes="(min-width: 768px) 16rem, 12rem"
+                        priority
+                        placeholder="blur"
                     />
                 </div>
             </div>

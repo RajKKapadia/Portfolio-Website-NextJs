@@ -1,6 +1,6 @@
 "use server"
 
-import { validateConfig, config } from "./config"
+import { config, validateTelegramConfig } from "./config"
 
 interface TelegramResponse {
     ok: boolean
@@ -17,9 +17,9 @@ interface TelegramResponse {
 }
 
 export const sendTelegramMessage = async ({ message }: { message: string }): Promise<{ status: boolean, message: string }> => {
-    const { isValid, missingEnvVars } = validateConfig()
+    const { isValid } = validateTelegramConfig()
     if (!isValid) {
-        console.error("Missing Telegram API key.")
+        console.error("Missing Telegram configuration.")
         return {
             status: false,
             message: "We are facing an issue sending the message."
@@ -39,12 +39,6 @@ export const sendTelegramMessage = async ({ message }: { message: string }): Pro
         })
         const result: TelegramResponse = (await response.json()) as TelegramResponse
         if (!response.ok || !result.ok) {
-            return {
-                status: false,
-                message: "We are facing an issue sending the message."
-            }
-        }
-        if (!response.ok) {
             return {
                 status: false,
                 message: "We are facing an issue sending the message."

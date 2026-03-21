@@ -1,7 +1,8 @@
 "use server"
 
 import { google } from "googleapis"
-import { config } from "./config"
+import { cache } from "react"
+import { config, validateGoogleSheetsConfig } from "./config"
 import { convertGoogleDriveUrl } from "./utils"
 
 export interface Resource {
@@ -22,7 +23,6 @@ function getGoogleSheetsClient() {
       credentials = JSON.parse(config.googleSheets.serviceAccountJson)
     } catch (parseError) {
       console.error("Failed to parse service account JSON:", parseError)
-      console.error("Raw JSON string:", config.googleSheets.serviceAccountJson?.substring(0, 100))
       throw new Error("Invalid service account JSON format")
     }
 
@@ -39,8 +39,14 @@ function getGoogleSheetsClient() {
 }
 
 // Fetch all resources from Google Sheet
-export async function getAllResources(): Promise<Resource[]> {
+export const getAllResources = cache(async (): Promise<Resource[]> => {
   try {
+    const { isValid, missingEnvVars } = validateGoogleSheetsConfig()
+
+    if (!isValid) {
+      throw new Error(`Missing required environment variables: ${missingEnvVars.join(", ")}`)
+    }
+
     const sheets = getGoogleSheetsClient()
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: config.googleSheets.spreadsheetId,
@@ -50,22 +56,27 @@ export async function getAllResources(): Promise<Resource[]> {
     const rows = response.data.values || []
 
     return rows
-      .map((row) => ({
-        thumbnailUrl: convertGoogleDriveUrl(row[0] || ""),
-        title: row[1] || "",
-        codeUrl: row[2] || "",
-        youtubeUrl: row[3] || "",
-        id: row[4] || "",
-      }))
+      .map((row) => {
+        const [thumbnailUrl = "", title = "", codeUrl = "", youtubeUrl = "", id = ""] = row
+
+        return {
+          thumbnailUrl: convertGoogleDriveUrl(String(thumbnailUrl)),
+          title: String(title),
+          codeUrl: String(codeUrl),
+          youtubeUrl: String(youtubeUrl),
+          id: String(id),
+        }
+      })
+      .filter((resource) => resource.id)
       .reverse()
   } catch (error) {
     console.error("Error fetching resources from Google Sheets:", error)
     return []
   }
-}
+})
 
 // Fetch a single resource by ID
-export async function getResourceById(id: string): Promise<Resource | null> {
+export const getResourceById = cache(async (id: string): Promise<Resource | null> => {
   try {
     const resources = await getAllResources()
     return resources.find((resource) => resource.id === id) || null
@@ -73,7 +84,7 @@ export async function getResourceById(id: string): Promise<Resource | null> {
     console.error("Error fetching resource by ID:", error)
     return null
   }
-}
+})
 
 // Save lead to Google Sheets
 export async function saveLead(data: {
@@ -83,6 +94,12 @@ export async function saveLead(data: {
   resourceTitle: string
 }): Promise<boolean> {
   try {
+    const { isValid, missingEnvVars } = validateGoogleSheetsConfig()
+
+    if (!isValid) {
+      throw new Error(`Missing required environment variables: ${missingEnvVars.join(", ")}`)
+    }
+
     const sheets = getGoogleSheetsClient()
 
     // Check if Leads sheet exists, if not create it

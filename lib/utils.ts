@@ -29,9 +29,9 @@ export function convertGoogleDriveUrl(url: string): string {
 
   if (fileIdMatch && fileIdMatch[1]) {
     const fileId = fileIdMatch[1]
-    // Use thumbnail endpoint which works better with referrer restrictions
-    // sz=w1000 ensures high quality, adjust as needed (w500, w1000, w2000, etc.)
-    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000`
+    // Keep the source asset large enough for desktop layouts without always
+    // pulling the original, oversized Drive image.
+    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1200`
   }
 
   // Return original URL if it's not a Google Drive sharing link

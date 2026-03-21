@@ -16,12 +16,25 @@ export const config = {
   }
 } as const
 
-export function validateConfig() {
+function createValidationResult(missingEnvVars: string[]) {
+  return {
+    isValid: missingEnvVars.length === 0,
+    missingEnvVars,
+  }
+}
+
+export function validateYouTubeConfig() {
   const missingEnvVars: string[] = []
 
   if (!config.youtube.apiKey) {
     missingEnvVars.push("YOUTUBE_API_KEY")
   }
+
+  return createValidationResult(missingEnvVars)
+}
+
+export function validateTelegramConfig() {
+  const missingEnvVars: string[] = []
 
   if (!config.telegram.botToken) {
     missingEnvVars.push("TELEGRAM_BOT_TOKEN")
@@ -31,6 +44,12 @@ export function validateConfig() {
     missingEnvVars.push("CHAT_ID")
   }
 
+  return createValidationResult(missingEnvVars)
+}
+
+export function validateGoogleSheetsConfig() {
+  const missingEnvVars: string[] = []
+
   if (!config.googleSheets.spreadsheetId) {
     missingEnvVars.push("GOOGLE_SHEET_ID")
   }
@@ -39,8 +58,5 @@ export function validateConfig() {
     missingEnvVars.push("GCP_SERVICE_ACCOUNT_JSON")
   }
 
-  return {
-    isValid: missingEnvVars.length === 0,
-    missingEnvVars
-  }
+  return createValidationResult(missingEnvVars)
 }
