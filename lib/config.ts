@@ -1,6 +1,12 @@
 export const config = {
   youtube: {
     apiKey: process.env.YOUTUBE_API_KEY || "",
+    apiReferer:
+      process.env.YOUTUBE_API_REFERER ||
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      process.env.SITE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "") ||
+      "http://localhost:3000",
     channelId: "UCOT01XvBSj12xQsANtTeAcQ",
     maxResults: 10
   },

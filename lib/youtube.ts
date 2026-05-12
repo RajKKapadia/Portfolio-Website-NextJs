@@ -57,8 +57,23 @@ interface YouTubeStatsResponse {
 
 const YOUTUBE_REVALIDATE_SECONDS = 60 * 60
 
+function getYouTubeRequestHeaders() {
+  if (!config.youtube.apiReferer) {
+    return undefined
+  }
+
+  const referer = config.youtube.apiReferer.endsWith("/")
+    ? config.youtube.apiReferer
+    : `${config.youtube.apiReferer}/`
+
+  return {
+    Referer: referer,
+  }
+}
+
 async function fetchYouTubeJson<T>(url: string, errorLabel: string): Promise<T> {
   const response = await fetch(url, {
+    headers: getYouTubeRequestHeaders(),
     next: { revalidate: YOUTUBE_REVALIDATE_SECONDS },
     signal: AbortSignal.timeout(5000),
   })

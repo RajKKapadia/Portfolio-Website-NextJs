@@ -2,6 +2,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Create `.env.local` with the server-side keys used by the app:
+
+```bash
+YOUTUBE_API_KEY=your_youtube_data_api_key
+YOUTUBE_API_REFERER=http://localhost:3000
+```
+
+If the YouTube API key is restricted by HTTP referrers in Google Cloud, `YOUTUBE_API_REFERER` must match an allowed referrer origin. In Vercel, the app can fall back to `VERCEL_URL`, but a custom production domain should be set explicitly.
+
 First, run the development server:
 
 ```bash
