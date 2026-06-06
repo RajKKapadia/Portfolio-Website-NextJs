@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { BriefcaseBusiness, Calendar, Factory, Mail, Send } from "lucide-react"
+import { ArrowUpRight, BriefcaseBusiness, Calendar, Factory, Mail, Send } from "lucide-react"
 import { useTransition } from "react"
 import { YoutubeIcno } from "../icons"
 import { z } from "zod"
@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { toast } from "sonner"
 import { sendTelegramMessage } from "@/lib/telegram"
+import { profile } from "@/lib/data/profile"
 
 export const inquiryFormSchema = z.object({
   name: z.string().min(1, "Required"),
@@ -33,73 +34,99 @@ export function Contact() {
     }
   })
 
-  function onSubmit(values: z.infer<typeof inquiryFormSchema>) {
-    startTransition(async () => {
-      const telegramMessage = `*Name:* ${values.name}\n*Email:* ${values.email}\n*Subject:* ${values.subject || "No subject"}\n*Message:* ${values.message || "No message"}`
-      const data = await sendTelegramMessage({ message: telegramMessage })
-      if (data.status) {
-        toast.success("Success", {
-          description: data.message,
+    function onSubmit(values: z.infer<typeof inquiryFormSchema>) {
+        startTransition(async () => {
+            const telegramMessage = `*Name:* ${values.name}\n*Email:* ${values.email}\n*Subject:* ${values.subject || "No subject"}\n*Message:* ${values.message || "No message"}`
+            const data = await sendTelegramMessage({ message: telegramMessage })
+            if (data.status) {
+                toast.success("Success", {
+                    description: data.message,
+                })
+                form.reset()
+            } else {
+                toast.error("Message failed", {
+                    description: data.message,
+                })
+            }
         })
-      } else {
-        toast.error("Error")
-      }
-    })
-    form.reset()
-  }
-
-  const contactLinks = [
-    {
-      icon: Mail,
-      href: "mailto:raajforyou@gmail.com",
-      text: "Send Email"
-    },
-    {
-      icon: YoutubeIcno,
-      href: "https://www.youtube.com/channel/UCOT01XvBSj12xQsANtTeAcQ",
-      text: "YouTube Channel"
-    },
-    {
-      icon: BriefcaseBusiness,
-      href: "https://www.upwork.com/freelancers/~0176aeacfcff7f1fc2?viewMode=1",
-      text: "Upwork Profile"
-    },
-    {
-      icon: Factory,
-      href: "https://www.fiverr.com/rajkkapadia",
-      text: "Fiverr Profile"
-    },
-    {
-      icon: Calendar,
-      href: "https://project-easy-meet.vercel.app/book/user_2rWmQLgVF13473zu2Mir3l0Yefx/fcf110c4-d28f-44d4-9d40-6e35f2a7f070",
-      text: "Book Appointment"
     }
-  ]
 
-  return (
-    <section className="container mx-auto px-4 py-20">
-      <h2 className="text-3xl font-bold mb-8">Get in Touch</h2>
-      <div className="grid md:grid-cols-2 gap-8">
-        <Card className="order-2 md:order-1">
-          <CardContent className="pt-6">
-            {contactLinks.map((link) => (
-              <div key={link.href} className="flex items-center gap-4 mb-4 last:mb-0">
-                <link.icon className="h-6 w-6" />
-                <a
-                  href={link.href}
-                  target={link.href.startsWith('mailto') ? undefined : '_blank'}
-                  rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                  className="text-lg hover:underline"
-                >
-                  {link.text}
+    const contactLinks = [
+        {
+            icon: Mail,
+            href: `mailto:${profile.email}`,
+            text: "Send Email"
+        },
+        {
+            icon: YoutubeIcno,
+            href: profile.youtubeUrl,
+            text: "YouTube Channel"
+        },
+        {
+            icon: BriefcaseBusiness,
+            href: profile.upworkUrl,
+            text: "Upwork Profile"
+        },
+        {
+            icon: Factory,
+            href: profile.fiverrUrl,
+            text: "Fiverr Profile"
+        },
+        {
+            icon: Calendar,
+            href: profile.bookingUrl,
+            text: "Book Consulting Call"
+        }
+    ]
+
+    return (
+    <section className="border-t border-border/70 bg-muted/25">
+      <div className="container mx-auto px-4 py-16 lg:py-20">
+        <div className="mb-10 grid gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-[0.18em] text-teal-700 dark:text-teal-400">
+              Start a project
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-normal sm:text-4xl">
+              Bring a messy AI idea, prototype, or integration problem.
+            </h2>
+          </div>
+          <p className="max-w-2xl text-lg leading-8 text-muted-foreground lg:justify-self-end">
+            The fastest path is a short call. Use the form if you already have project context, constraints, or links to share.
+          </p>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-[0.85fr_1.15fr]">
+          <Card className="order-2 border-border/70 bg-background shadow-sm md:order-1">
+            <CardContent className="p-5 sm:p-6">
+              <Button asChild size="lg" className="mb-6 w-full">
+                <a href={profile.bookingUrl} target="_blank" rel="noopener noreferrer">
+                  <Calendar className="size-5" />
+                  Book consulting call
                 </a>
+              </Button>
+              <div className="grid gap-3">
+                {contactLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target={link.href.startsWith('mailto') ? undefined : '_blank'}
+                    rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                    className="flex items-center justify-between rounded-md border border-border/70 bg-muted/25 px-4 py-3 text-sm text-foreground transition-colors hover:bg-accent"
+                  >
+                    <span className="flex items-center gap-3">
+                      <link.icon className="size-5" />
+                      {link.text}
+                    </span>
+                    <ArrowUpRight className="size-4" />
+                  </a>
+                ))}
               </div>
-            ))}
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        <Card className="order-1 md:order-2">
-          <CardContent className="pt-6">
+          <Card className="order-1 border-border/70 bg-background text-foreground shadow-lg md:order-2">
+            <CardContent className="p-5 sm:p-6">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 
@@ -124,7 +151,7 @@ export function Contact() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="Your valid email address"></Input>
+                        <Input {...field} type="email" placeholder="Your valid email address"></Input>
                       </FormControl>
                       <FormMessage></FormMessage>
                     </FormItem>
@@ -160,13 +187,14 @@ export function Contact() {
                 ></FormField>
 
                 <Button type="submit" className="w-full" disabled={isPending}>
-                  <Send className="mr-2 h-4 w-4" />
-                  Send Message
+                  <Send className="size-4" />
+                  {isPending ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </Form>
           </CardContent>
         </Card>
+      </div>
       </div>
     </section>
   )

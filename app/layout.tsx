@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Raj Kapadia - Senior Software Developer & AI Expert',
-  description: 'Portfolio website of Raj Kapadia, showcasing expertise in AI/ML, chatbots, and full-stack development.'
+  title: 'Raj Kapadia - AI/LLM Consultant and Full-Stack AI Engineer',
+  description: 'Raj Kapadia builds production-ready AI agents, LLM applications, chatbots, and full-stack AI products for teams that need reliable automation.'
 }
 
 export default function RootLayout({

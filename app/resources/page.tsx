@@ -15,14 +15,22 @@ export default async function ResourcesPage() {
   const resources = await getAllResources()
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 pt-16">
-      <div className="container mx-auto px-4 py-20">
-        <h1 className="text-3xl font-bold mb-2">Resources</h1>
-        <p className="text-muted-foreground mb-8">
-          Free source code, project files, and tutorial assets. Click on any
-          resource to get instant access.
-        </p>
+    <main className="min-h-screen bg-background pt-16">
+      <section className="border-b border-border/70 bg-muted/25">
+        <div className="container mx-auto px-4 py-16 lg:py-20">
+          <p className="text-sm font-medium uppercase tracking-[0.18em] text-teal-700 dark:text-teal-400">
+            Free implementation resources
+          </p>
+          <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-normal sm:text-5xl">
+            Source code and project files from applied AI tutorials.
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-8 text-muted-foreground">
+            Browse free resources, tutorials, and starter assets. Click any item to unlock the related code and walkthrough links.
+          </p>
+        </div>
+      </section>
 
+      <section className="container mx-auto px-4 py-12 lg:py-16">
         {resources.length > 0 ? (
           <ResourceCardGrid resources={resources} />
         ) : (
@@ -34,7 +42,7 @@ export default async function ResourcesPage() {
             </p>
           </div>
         )}
-      </div>
+      </section>
     </main>
   )
 }

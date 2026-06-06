@@ -11,11 +11,11 @@ interface ResourceCardGridProps {
 
 export function ResourceCardGrid({ resources }: ResourceCardGridProps) {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       {resources.map((resource) => (
         <div key={resource.id} className="h-full">
           <Link href={`/resources/${resource.id}`} className="block h-full">
-            <Card className="overflow-hidden group hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+            <Card className="group flex h-full flex-col overflow-hidden border-border/70 bg-muted/25 p-0 shadow-sm transition-colors hover:border-foreground/20">
               <div className="relative aspect-video overflow-hidden">
                 <Image
                   src={resource.thumbnailUrl}
@@ -25,13 +25,16 @@ export function ResourceCardGrid({ resources }: ResourceCardGridProps) {
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 />
               </div>
-              <CardContent className="p-6 flex-1 flex flex-col">
-                <h3 className="text-lg font-semibold mb-4 line-clamp-2 flex-1">
+              <CardContent className="flex flex-1 flex-col p-5">
+                <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                  Free resource
+                </p>
+                <h3 className="mb-5 line-clamp-2 flex-1 text-lg font-semibold leading-7">
                   {resource.title}
                 </h3>
                 <span
                   className={buttonVariants({
-                    className: "w-full transform transition-transform duration-200 group-hover:scale-[1.02]",
+                    className: "w-full transition-colors",
                   })}
                 >
                   Get Access

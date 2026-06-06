@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { toast } from "sonner"
 import type { Resource } from "@/lib/sheets"
-import { CheckCircle2, Code2 } from "lucide-react"
+import { ArrowRight, CheckCircle2, Code2, LockKeyhole } from "lucide-react"
 import { YoutubeIcno } from "../icons"
 
 interface ResourceLandingProps {
@@ -68,12 +68,21 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* Left Side - Content */}
+    <div className="min-h-screen bg-background pt-16">
+      <div className="border-b border-border/70 bg-muted/25">
+        <div className="container mx-auto px-4 py-12 lg:py-16">
+          <p className="text-sm font-medium uppercase tracking-[0.18em] text-teal-700 dark:text-teal-400">
+            Free resource
+          </p>
+          <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-normal sm:text-4xl lg:text-5xl">
+            {resource.title}
+          </h1>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-10 lg:py-14">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div className="space-y-8">
-            {/* Thumbnail */}
             <div className="relative w-full aspect-video rounded-lg overflow-hidden border">
               <Image
                 src={resource.thumbnailUrl}
@@ -85,17 +94,9 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
               />
             </div>
 
-            {/* Title & Description */}
-            <div className="space-y-4">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-                {resource.title}
-              </h1>
-            </div>
-
-            {/* Features */}
-            <div className="space-y-3">
-              <h2 className="text-xl font-semibold">Get instant access to:</h2>
-              <div className="space-y-2">
+            <div className="rounded-lg border border-border/70 bg-muted/25 p-5 sm:p-6">
+              <h2 className="text-2xl font-semibold">What you get</h2>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                   <span className="text-muted-foreground">Complete source code</span>
@@ -116,15 +117,17 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
             </div>
           </div>
 
-          {/* Right Side - Form */}
-          <div className="lg:sticky lg:top-8">
-            <Card className="border-2">
-              <CardContent className="pt-6">
+          <div className="lg:sticky lg:top-24">
+            <Card className="border-border/70 p-0 shadow-lg">
+              <CardContent className="p-5 sm:p-6">
                 {!isSubmitted ? (
                   <>
                     <div className="mb-6 space-y-2">
-                      <h3 className="text-2xl font-bold">Get Free Access</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <div className="mb-4 grid size-11 place-items-center rounded-md bg-primary text-primary-foreground">
+                        <LockKeyhole className="size-5" />
+                      </div>
+                      <h3 className="text-2xl font-semibold">Get free access</h3>
+                      <p className="leading-7 text-muted-foreground">
                         Enter your details below to access the source code and resources
                       </p>
                     </div>
@@ -161,6 +164,7 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
 
                         <Button type="submit" className="w-full" size="lg" disabled={isPending}>
                           {isPending ? "Processing..." : "Get Instant Access"}
+                          {!isPending && <ArrowRight className="size-4" />}
                         </Button>
                       </form>
                     </Form>
@@ -180,7 +184,7 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
                     </div>
 
                     <div className="space-y-2 text-center">
-                      <h3 className="text-2xl font-bold">Access Granted!</h3>
+                      <h3 className="text-2xl font-semibold">Access granted</h3>
                       <p className="text-muted-foreground">
                         You can now access all the resources for this project.
                       </p>

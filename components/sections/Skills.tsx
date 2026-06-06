@@ -1,57 +1,43 @@
-import { Card, CardContent } from "@/components/ui/card"
+import { expertiseGroups } from "@/lib/data/profile"
+import { Boxes, Cloud, Cpu, Workflow } from "lucide-react"
 
 export function Skills() {
-    const skillCategories = [
-        {
-            title: "Large Language Models (LLMs)",
-            skills: ["Fine-tuning & Training", "Inference Optimization", "AI Agent Development (OpenAI Agent SDK, Google ADK)", "LLM Application Development", "Prompt Engineering"]
-        },
-        {
-            title: "AI/ML/DL",
-            skills: ["TensorFlow", "PyTorch", "Image Classification", "Object Detection", "Natural Language Processing (NLP)", "Computer Vision", "Deep Learning", "Vector Databases (Elastic, Qdrant)"]
-        },
-        {
-            title: "API Development",
-            skills: ["Python + Flask", "Python + FastAPI", "Node.js + Express (JavaScript)", "Node.js + Express (TypeScript)", "RESTful APIs", "Webhook Development"]
-        },
-        {
-            title: "Full-Stack Development",
-            skills: ["React (TypeScript)", "Next.js (App Router, TypeScript)", "Drizzle ORM", "Prisma", "ShadCN UI", "TailwindCSS", "PostgreSQL"]
-        },
-        {
-            title: "Cloud Platforms",
-            skills: ["Google Cloud Platform (GCP)", "Amazon Web Services (AWS)", "Docker", "Cloud Deployment", "Serverless Architecture"]
-        },
-        {
-            title: "Chatbot Development",
-            skills: ["Google Dialogflow ES", "Google Dialogflow CX", "Actions on Google", "Conversational AI", "100+ Production Chatbots"]
-        },
-        {
-            title: "Bot Development",
-            skills: ["Telegram Bots (Python: python-telegram-bot, aiogram)", "Telegram Bots (TypeScript: telegraf, grammy)", "WhatsApp Integration"]
-        },
-        {
-            title: "Specialized Projects",
-            skills: ["Text-to-SQL Systems", "Image Search Engines", "Face Recognition", "Voice Authentication", "Toxic Comment Classification"]
-        }
-    ]
+    const icons = [Workflow, Cpu, Cloud, Boxes]
 
     return (
-        <section className="container mx-auto px-4 py-20">
-            <h2 className="text-3xl font-bold mb-8">Skills & Expertise</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {skillCategories.map((category) => (
-                    <Card key={category.title}>
-                        <CardContent className="pt-6">
-                            <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
-                            <ul className="list-disc list-inside space-y-2">
-                                {category.skills.map((skill) => (
-                                    <li key={skill}>{skill}</li>
-                                ))}
-                            </ul>
-                        </CardContent>
-                    </Card>
-                ))}
+        <section className="bg-background">
+            <div className="container mx-auto px-4 py-16 lg:py-20">
+                <div className="mb-10 max-w-3xl">
+                    <p className="text-sm font-medium uppercase tracking-[0.18em] text-sky-700 dark:text-sky-400">
+                        Technical depth
+                    </p>
+                    <h2 className="mt-3 text-3xl font-semibold tracking-normal sm:text-4xl">
+                        A stack built for AI products that need frontend, backend, and model fluency.
+                    </h2>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+                    {expertiseGroups.map((category, index) => {
+                        const Icon = icons[index] ?? Boxes
+
+                        return (
+                            <article key={category.title} className="rounded-lg border border-border/70 bg-muted/25 p-5">
+                                <Icon className="mb-4 size-6 text-foreground" />
+                                <h3 className="text-xl font-semibold">{category.title}</h3>
+                                <div className="mt-5 flex flex-wrap gap-2">
+                                    {category.skills.map((skill) => (
+                                        <span
+                                            key={skill}
+                                            className="rounded-md border border-border/70 bg-background px-2.5 py-1.5 text-sm text-muted-foreground"
+                                        >
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </article>
+                        )
+                    })}
+                </div>
             </div>
         </section>
     )

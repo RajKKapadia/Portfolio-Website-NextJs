@@ -1,86 +1,111 @@
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { projects } from "@/lib/data/projects"
-import { ArrowUpRight, Cpu, Globe } from "lucide-react"
-
-const previewGradients = [
-  "from-sky-500/20 via-cyan-500/10 to-transparent",
-  "from-emerald-500/20 via-teal-500/10 to-transparent",
-  "from-amber-500/20 via-orange-500/10 to-transparent",
-  "from-rose-500/20 via-pink-500/10 to-transparent",
-]
-
-function ProjectPreview({
-  title,
-  technology,
-  index,
-}: {
-  title: string
-  technology: string
-  index: number
-}) {
-  const gradient = previewGradients[index % previewGradients.length]
-
-  return (
-    <div className={`relative aspect-video overflow-hidden bg-linear-to-br ${gradient}`}>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.16),transparent_38%),linear-gradient(135deg,rgba(10,10,10,0.12),rgba(10,10,10,0.4))]" />
-      <div className="relative flex h-full flex-col justify-between p-5">
-        <div className="flex items-center justify-between">
-          <div className="rounded-full border border-white/20 bg-white/10 p-2 text-white/90 backdrop-blur-sm">
-            <Globe className="size-5" />
-          </div>
-          <div className="rounded-full border border-white/20 bg-black/20 px-3 py-1 text-xs text-white/80 backdrop-blur-sm">
-            Featured Build
-          </div>
-        </div>
-        <div className="space-y-3">
-          <p className="max-w-[18rem] text-lg font-semibold leading-tight text-white">
-            {title}
-          </p>
-          <p className="line-clamp-2 text-sm text-white/75">{technology}</p>
-        </div>
-      </div>
-    </div>
-  )
-}
+import { ArrowUpRight, CheckCircle2, Layers3 } from "lucide-react"
 
 export function Projects() {
-  return (
-    <section className="container mx-auto px-4 py-20">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold">Projects</h2>
-        <p className="mt-2 max-w-2xl text-muted-foreground">
-          Production work across AI agents, chatbots, NLP systems, and full-stack applications.
-        </p>
-      </div>
+  const featuredProjects = projects.slice(0, 4)
+  const additionalProjects = projects.slice(4)
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {projects.map((project, index) => (
-          <Card
-            key={project.id}
-            className="group flex h-full flex-col overflow-hidden border-2 border-transparent transition-shadow duration-300 hover:shadow-lg"
-          >
-            <ProjectPreview
-              title={project.title}
-              technology={project.technology}
-              index={index}
-            />
-            <CardContent className="flex flex-1 flex-col p-6">
-              <h3 className="mb-2 line-clamp-2 text-xl font-semibold">{project.title}</h3>
-              <p className="mb-4 line-clamp-3 text-muted-foreground">{project.description}</p>
-              <div className="mb-4 flex items-start gap-2 text-sm text-muted-foreground">
-                <Cpu className="mt-0.5 size-4 shrink-0" />
-                <span>{project.technology}</span>
+  return (
+    <section className="border-y border-border/70 bg-muted/25">
+      <div className="container mx-auto px-4 py-16 lg:py-20">
+        <div className="mb-10 grid gap-4 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-[0.18em] text-teal-700 dark:text-teal-400">
+              Selected work
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-normal sm:text-4xl">
+              Applied AI systems, not slideware.
+            </h2>
+          </div>
+          <p className="max-w-3xl text-lg leading-8 text-muted-foreground lg:justify-self-end">
+            A sample of agent, chatbot, LLM, NLP, computer vision, and bot products that show how Raj turns model capability into usable software.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {featuredProjects.map((project, index) => (
+            <article
+              key={project.id}
+              className="group flex h-full flex-col rounded-lg border border-border/70 bg-background p-5 shadow-sm transition-colors hover:border-foreground/20"
+            >
+              <div className="mb-5 flex flex-wrap items-center gap-2">
+                <span className="rounded-md bg-emerald-600/10 px-2.5 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300">
+                  {project.category}
+                </span>
+                {index === 0 && (
+                  <span className="rounded-md bg-amber-500/15 px-2.5 py-1 text-xs font-medium text-amber-700 dark:text-amber-300">
+                    Featured
+                  </span>
+                )}
               </div>
-              <Button asChild className="mt-auto w-full">
-                <a href={project.url} target="_blank" rel="noopener noreferrer">
-                  Check it out
-                  <ArrowUpRight className="size-4" />
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
+
+              <div className="space-y-3">
+                <h3 className="text-2xl font-semibold tracking-normal">{project.title}</h3>
+                <p className="leading-7 text-muted-foreground">{project.description}</p>
+              </div>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                    Problem
+                  </p>
+                  <p className="mt-2 leading-7">{project.problem}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                    Outcome
+                  </p>
+                  <p className="mt-2 leading-7">{project.outcome}</p>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-2">
+                {project.highlights.map((highlight) => (
+                  <div key={highlight} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="size-4 text-teal-700 dark:text-teal-400" />
+                    {highlight}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-col gap-4 border-t border-border/70 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <Layers3 className="mt-0.5 size-4 shrink-0 text-foreground" />
+                  <span>{project.technology}</span>
+                </div>
+                <Button asChild variant="outline" className="sm:shrink-0">
+                  <a href={project.url} target="_blank" rel="noopener noreferrer">
+                    View build
+                    <ArrowUpRight className="size-4" />
+                  </a>
+                </Button>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {additionalProjects.length > 0 && (
+          <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {additionalProjects.map((project) => (
+              <a
+                key={project.id}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg border border-border/70 bg-background p-4 shadow-sm transition-colors hover:border-foreground/20"
+              >
+                <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                  {project.category}
+                </p>
+                <h3 className="mt-3 font-semibold leading-6">{project.title}</h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
+                  {project.outcome}
+                </p>
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

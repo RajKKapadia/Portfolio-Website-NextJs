@@ -5,19 +5,23 @@ import { LatestVideo } from "@/components/sections/LatestVideo"
 import { Contact } from "@/components/sections/Contact"
 import { Courses } from "@/components/sections/Courses"
 import { Projects } from "@/components/sections/Projects"
+import { BusinessServices } from "@/components/sections/BusinessServices"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-linear-to-b from-neutral-50 to-neutral-100 dark:from-neutral-950 dark:to-neutral-900 pt-16">
+    <main className="min-h-screen bg-background pt-16">
       <Hero />
       <section id="about">
         <About />
       </section>
-      <section id="skills">
-        <Skills />
+      <section id="services">
+        <BusinessServices />
       </section>
-      <section id="projects">
+      <section id="work">
         <Projects />
+      </section>
+      <section id="expertise">
+        <Skills />
       </section>
       <section id="videos">
         <LatestVideo />

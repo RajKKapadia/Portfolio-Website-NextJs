@@ -1,94 +1,95 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Bot, Code2, Globe, Headset, MessageSquare, Server } from "lucide-react"
+import { services, profile } from "@/lib/data/profile"
+import { ArrowRight, Bot, BrainCircuit, Code2, MessageSquare, Network, ShieldCheck } from "lucide-react"
 import Link from "next/link"
 
-const offerings = [
-  {
-    title: "Website / Landing Page Setup",
-    description: "Fast, mobile-friendly pages designed to convert local traffic into leads.",
-    icon: Globe,
-  },
-  {
-    title: "Domain + Hosting Management",
-    description: "End-to-end domain and hosting setup with reliable launch support.",
-    icon: Server,
-  },
-  {
-    title: "WhatsApp Lead Button Integration",
-    description: "Direct WhatsApp entry points so customers can contact you in one tap.",
-    icon: MessageSquare,
-  },
-  {
-    title: "Unlimited Updates & Support",
-    description: "Ongoing content, copy, and site updates with active maintenance support.",
-    icon: Headset,
-  },
-  {
-    title: "Custom Feature Development",
-    description: "Tailored workflows and features based on your specific business process.",
-    icon: Code2,
-  },
-  {
-    title: "AI Chatbot for Website + WhatsApp",
-    description: "Automated responses and lead qualification across web and WhatsApp.",
-    icon: Bot,
-  },
-]
+const serviceIcons = [Network, BrainCircuit, MessageSquare, Code2]
 
-const proofStats = [
-  { label: "Years of Experience", value: "7+" },
-  { label: "Chatbots Delivered", value: "100+" },
+const engagementModes = [
+  {
+    title: "Prototype-to-production audit",
+    description: "Review the architecture, failure points, and launch path before you invest in a full rebuild.",
+  },
+  {
+    title: "End-to-end AI product build",
+    description: "Design and ship the agent logic, APIs, frontend, deployment flow, and handoff documentation.",
+  },
+  {
+    title: "Webhook and chatbot systems",
+    description: "Build WhatsApp, Telegram, Dialogflow, Gemini, and worker-backed automations that handle real traffic.",
+  },
+  {
+    title: "LLM workflow rescue",
+    description: "Stabilize unreliable prompts, tool calls, retrieval flows, background jobs, and product UX.",
+  },
 ]
 
 export function BusinessServices() {
   return (
-    <section className="container mx-auto px-4 py-20">
-      <div className="max-w-3xl">
-        <h2 className="text-3xl font-bold mb-3">Local Business Website & AI Growth Stack</h2>
-        <p className="text-muted-foreground text-lg">
-          One partner for your website, hosting, lead capture, updates, and AI automation.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        {offerings.map((offering) => (
-          <Card key={offering.title}>
-            <CardContent className="pt-6">
-              <offering.icon className="h-6 w-6 mb-4 text-primary" />
-              <h3 className="text-xl font-semibold mb-2">{offering.title}</h3>
-              <p className="text-muted-foreground">{offering.description}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      <Card className="mt-8 border-2">
-        <CardContent className="pt-6 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Transparent pricing</p>
-            <h3 className="text-2xl font-semibold">Setup: INR 5,999 | Monthly: INR 1,499</h3>
-            <p className="text-muted-foreground mt-2">
-              Custom development and advanced AI automation can be added as needed.
+    <section className="bg-background">
+      <div className="container mx-auto px-4 py-16 lg:py-20">
+        <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="text-sm font-medium uppercase tracking-[0.18em] text-amber-700 dark:text-amber-400">
+              Consulting services
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-normal sm:text-4xl">
+              Build AI workflows your team can actually operate.
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-muted-foreground">
+              From prototype cleanup to full product delivery, the focus is reliable agent behavior, practical integrations, and user-facing software that makes AI useful.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button asChild size="lg">
-              <Link href="/#contact">Discuss Requirements</Link>
+          <Button asChild variant="outline" size="lg">
+            <Link href="/#contact">
+              Discuss a project
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {services.map((service, index) => {
+            const Icon = serviceIcons[index] ?? Bot
+
+            return (
+              <article
+                key={service.title}
+                className="flex h-full flex-col rounded-lg border border-border/70 bg-muted/25 p-5 shadow-sm transition-colors hover:border-foreground/20 hover:bg-background"
+              >
+                <Icon className="mb-5 size-7 text-teal-700 dark:text-teal-400" />
+                <h3 className="text-xl font-semibold">{service.title}</h3>
+                <p className="mt-3 flex-1 leading-7 text-muted-foreground">{service.description}</p>
+                <p className="mt-5 border-t border-border/70 pt-4 text-sm font-medium text-foreground">
+                  {service.proof}
+                </p>
+              </article>
+            )
+          })}
+        </div>
+
+        <div className="mt-8 rounded-lg border border-border/70 bg-muted/25 p-5 shadow-sm sm:p-6">
+          <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <ShieldCheck className="size-4" />
+              Ways to work together
+            </div>
+            <Button asChild size="lg" className="w-full sm:w-auto sm:shrink-0">
+              <a href={profile.bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book a fit call
+                <ArrowRight className="size-4" />
+              </a>
             </Button>
           </div>
-        </CardContent>
-      </Card>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-        {proofStats.map((stat) => (
-          <Card key={stat.label}>
-            <CardContent className="pt-6">
-              <p className="text-3xl font-bold">{stat.value}</p>
-              <p className="text-muted-foreground">{stat.label}</p>
-            </CardContent>
-          </Card>
-        ))}
+          <div className="grid gap-3 sm:grid-cols-2">
+            {engagementModes.map((mode) => (
+              <div key={mode.title} className="rounded-md border border-border/70 bg-background px-4 py-3">
+                <h3 className="text-sm font-semibold text-foreground">{mode.title}</h3>
+                <p className="mt-1 text-sm leading-6 text-muted-foreground">{mode.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
