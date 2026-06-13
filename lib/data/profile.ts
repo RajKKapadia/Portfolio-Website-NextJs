@@ -10,7 +10,6 @@ export const profile = {
   youtubeUrl: "https://www.youtube.com/channel/UCOT01XvBSj12xQsANtTeAcQ",
   upworkUrl: "https://www.upwork.com/freelancers/~0176aeacfcff7f1fc2?viewMode=1",
   fiverrUrl: "https://www.fiverr.com/rajkkapadia",
-  resumePath: "/RajKapadia.pdf",
 } as const
 
 export const proofStats = [

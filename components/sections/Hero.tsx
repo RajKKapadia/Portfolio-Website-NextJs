@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Calendar, FileDown, Sparkles } from "lucide-react"
+import { ArrowRight, Calendar, Sparkles } from "lucide-react"
 import Image from "next/image"
 import avatarImage from "@/public/avatar.jpeg"
 import { GithubIcon } from "../icons"
@@ -51,12 +51,6 @@ export function Hero() {
                             <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer">
                                 <GithubIcon className="size-5" />
                                 View GitHub
-                            </a>
-                        </Button>
-                        <Button asChild size="lg" variant="ghost">
-                            <a href={profile.resumePath} download="RajKapadia-Resume.pdf">
-                                <FileDown className="size-5" />
-                                Resume
                             </a>
                         </Button>
                     </div>
