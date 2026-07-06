@@ -1,4 +1,14 @@
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item"
+import { Separator } from "@/components/ui/separator"
 import { services, profile } from "@/lib/data/profile"
 import { ArrowRight, Bot, BrainCircuit, Code2, MessageSquare, Network, ShieldCheck } from "lucide-react"
 import Link from "next/link"
@@ -53,43 +63,59 @@ export function BusinessServices() {
             const Icon = serviceIcons[index] ?? Bot
 
             return (
-              <article
+              <Card
                 key={service.title}
-                className="flex h-full flex-col rounded-lg border border-border/70 bg-muted/25 p-5 shadow-sm transition-colors hover:border-foreground/20 hover:bg-background"
+                role="article"
+                className="h-full gap-0 border-border/70 bg-muted/25 py-0 transition-colors hover:border-foreground/20 hover:bg-background"
               >
-                <Icon className="mb-5 size-7 text-teal-700 dark:text-teal-400" />
-                <h3 className="text-xl font-semibold">{service.title}</h3>
-                <p className="mt-3 flex-1 leading-7 text-muted-foreground">{service.description}</p>
-                <p className="mt-5 border-t border-border/70 pt-4 text-sm font-medium text-foreground">
+                <CardHeader className="p-5 pb-0">
+                  <Icon className="mb-3 size-7 text-teal-700 dark:text-teal-400" />
+                  <CardTitle>
+                    <h3 className="text-xl">{service.title}</h3>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-1 p-5 pt-3">
+                  <CardDescription className="text-base leading-7">
+                    {service.description}
+                  </CardDescription>
+                </CardContent>
+                <Separator />
+                <CardFooter className="p-5 pt-4 text-sm font-medium">
                   {service.proof}
-                </p>
-              </article>
+                </CardFooter>
+              </Card>
             )
           })}
         </div>
 
-        <div className="mt-8 rounded-lg border border-border/70 bg-muted/25 p-5 shadow-sm sm:p-6">
-          <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+        <Card className="mt-8 gap-0 border-border/70 bg-muted/25 py-0">
+          <CardHeader className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <CardTitle className="flex items-center gap-2 text-sm text-muted-foreground">
               <ShieldCheck className="size-4" />
               Ways to work together
-            </div>
+            </CardTitle>
             <Button asChild size="lg" className="w-full sm:w-auto sm:shrink-0">
               <a href={profile.bookingUrl} target="_blank" rel="noopener noreferrer">
                 Book a fit call
                 <ArrowRight className="size-4" />
               </a>
             </Button>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          </CardHeader>
+          <CardContent className="grid gap-3 p-5 pt-0 sm:grid-cols-2 sm:p-6 sm:pt-0">
             {engagementModes.map((mode) => (
-              <div key={mode.title} className="rounded-md border border-border/70 bg-background px-4 py-3">
-                <h3 className="text-sm font-semibold text-foreground">{mode.title}</h3>
-                <p className="mt-1 text-sm leading-6 text-muted-foreground">{mode.description}</p>
-              </div>
+              <Item key={mode.title} variant="outline" size="sm" className="bg-background">
+                <ItemContent>
+                  <ItemTitle>
+                    <h3>{mode.title}</h3>
+                  </ItemTitle>
+                  <ItemDescription className="line-clamp-none leading-6">
+                    {mode.description}
+                  </ItemDescription>
+                </ItemContent>
+              </Item>
             ))}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   )

@@ -1,4 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
 import { getLatestVideos, type YouTubeVideo } from "@/lib/youtube"
 import { AlertCircle, ArrowUpRight, Calendar, Eye, ThumbsUp } from "lucide-react"
@@ -75,49 +77,57 @@ export async function LatestVideo() {
         </div>
 
         {usedFallback && (
-          <div className="mb-6 flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-700 dark:text-amber-300">
-            <AlertCircle className="size-4 shrink-0" />
-            <span>Live YouTube data was unavailable, so example content is shown for now.</span>
-          </div>
+          <Alert className="mb-6 border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300">
+            <AlertCircle />
+            <AlertTitle>Showing example videos</AlertTitle>
+            <AlertDescription className="text-current">
+              Live YouTube data was unavailable, so example content is shown for now.
+            </AlertDescription>
+          </Alert>
         )}
 
         <div className="grid grid-cols-1 gap-5 pb-16 md:grid-cols-2 xl:grid-cols-3 lg:pb-20">
           {displayVideos.map((video) => (
             <Card key={video.id} className="h-full overflow-hidden border-border/70 bg-background p-0 shadow-sm">
               <CardContent className="p-0">
-                <a
-                  href={`https://www.youtube.com/watch?v=${video.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="block h-auto w-full whitespace-normal p-0 text-left hover:bg-transparent"
                 >
-                  <div className="relative aspect-video overflow-hidden">
-                    <Image
-                      src={video.thumbnail}
-                      alt={video.title}
-                      fill
-                      className="object-cover transition-transform duration-300 hover:scale-105"
-                      sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="mb-4 line-clamp-2 text-lg font-semibold">{video.title}</h3>
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1.5">
-                        <Eye className="size-4" />
-                        <span>{video.views}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <ThumbsUp className="size-4" />
-                        <span>{video.likes}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <Calendar className="size-4" />
-                        <span>{video.publishedAt}</span>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${video.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <AspectRatio ratio={16 / 9} className="relative overflow-hidden">
+                      <Image
+                        src={video.thumbnail}
+                        alt={video.title}
+                        fill
+                        className="object-cover transition-transform duration-300 hover:scale-105"
+                        sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                      />
+                    </AspectRatio>
+                    <div className="p-5">
+                      <h3 className="mb-4 line-clamp-2 text-lg font-semibold">{video.title}</h3>
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1.5">
+                          <Eye className="size-4" />
+                          <span>{video.views}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <ThumbsUp className="size-4" />
+                          <span>{video.likes}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="size-4" />
+                          <span>{video.publishedAt}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           ))}

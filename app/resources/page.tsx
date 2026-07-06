@@ -2,6 +2,13 @@ import { getAllResources } from "@/lib/sheets"
 import { ResourceCardGrid } from "@/components/sections/ResourceCard"
 import { PackageOpen } from "lucide-react"
 import type { Metadata } from "next"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
 
 export const metadata: Metadata = {
   title: "Free Resources - Raj Kapadia",
@@ -34,13 +41,17 @@ export default async function ResourcesPage() {
         {resources.length > 0 ? (
           <ResourceCardGrid resources={resources} />
         ) : (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <PackageOpen className="h-16 w-16 text-muted-foreground mb-4" />
-            <h2 className="text-xl font-semibold mb-2">No resources yet</h2>
-            <p className="text-muted-foreground">
+          <Empty className="border">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <PackageOpen />
+              </EmptyMedia>
+              <EmptyTitle>No resources yet</EmptyTitle>
+              <EmptyDescription>
               Check back soon — new resources are added regularly.
-            </p>
-          </div>
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
         )}
       </section>
     </main>

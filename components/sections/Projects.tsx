@@ -1,4 +1,15 @@
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
+import { Separator } from "@/components/ui/separator"
 import { projects } from "@/lib/data/projects"
 import { ArrowUpRight, CheckCircle2, Layers3 } from "lucide-react"
 
@@ -25,51 +36,68 @@ export function Projects() {
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {featuredProjects.map((project, index) => (
-            <article
+            <Card
               key={project.id}
-              className="group flex h-full flex-col rounded-lg border border-border/70 bg-background p-5 shadow-sm transition-colors hover:border-foreground/20"
+              role="article"
+              className="group h-full gap-0 border-border/70 bg-background py-0 transition-colors hover:border-foreground/20"
             >
-              <div className="mb-5 flex flex-wrap items-center gap-2">
-                <span className="rounded-md bg-emerald-600/10 px-2.5 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300">
+              <CardHeader className="gap-5 p-5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge variant="secondary" className="text-emerald-700 dark:text-emerald-300">
                   {project.category}
-                </span>
-                {index === 0 && (
-                  <span className="rounded-md bg-amber-500/15 px-2.5 py-1 text-xs font-medium text-amber-700 dark:text-amber-300">
+                  </Badge>
+                  {index === 0 && (
+                    <Badge variant="secondary" className="text-amber-700 dark:text-amber-300">
                     Featured
-                  </span>
-                )}
-              </div>
-
-              <div className="space-y-3">
-                <h3 className="text-2xl font-semibold tracking-normal">{project.title}</h3>
-                <p className="leading-7 text-muted-foreground">{project.description}</p>
-              </div>
-
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                    Problem
-                  </p>
-                  <p className="mt-2 leading-7">{project.problem}</p>
+                    </Badge>
+                  )}
                 </div>
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                    Outcome
-                  </p>
-                  <p className="mt-2 leading-7">{project.outcome}</p>
+                <div className="space-y-3">
+                  <CardTitle>
+                    <h3 className="text-2xl tracking-normal">{project.title}</h3>
+                  </CardTitle>
+                  <CardDescription className="text-base leading-7">
+                    {project.description}
+                  </CardDescription>
                 </div>
-              </div>
+              </CardHeader>
 
-              <div className="mt-6 space-y-2">
+              <CardContent className="flex flex-1 flex-col gap-6 p-5 pt-0">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Item size="sm" className="items-start p-0">
+                    <ItemContent>
+                      <ItemTitle className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                        Problem
+                      </ItemTitle>
+                      <p className="mt-1 leading-7">{project.problem}</p>
+                    </ItemContent>
+                  </Item>
+                  <Item size="sm" className="items-start p-0">
+                    <ItemContent>
+                      <ItemTitle className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                        Outcome
+                      </ItemTitle>
+                      <p className="mt-1 leading-7">{project.outcome}</p>
+                    </ItemContent>
+                  </Item>
+                </div>
+
+                <div className="grid gap-2">
                 {project.highlights.map((highlight) => (
-                  <div key={highlight} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="size-4 text-teal-700 dark:text-teal-400" />
-                    {highlight}
-                  </div>
+                    <Item key={highlight} size="sm" className="p-0 text-muted-foreground">
+                      <ItemMedia>
+                        <CheckCircle2 className="size-4 text-teal-700 dark:text-teal-400" />
+                      </ItemMedia>
+                      <ItemContent>
+                        <ItemTitle className="font-normal">{highlight}</ItemTitle>
+                      </ItemContent>
+                    </Item>
                 ))}
-              </div>
+                </div>
+              </CardContent>
 
-              <div className="mt-6 flex flex-col gap-4 border-t border-border/70 pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <Separator />
+              <CardFooter className="flex flex-col items-stretch gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-2 text-sm text-muted-foreground">
                   <Layers3 className="mt-0.5 size-4 shrink-0 text-foreground" />
                   <span>{project.technology}</span>
@@ -80,29 +108,32 @@ export function Projects() {
                     <ArrowUpRight className="size-4" />
                   </a>
                 </Button>
-              </div>
-            </article>
+              </CardFooter>
+            </Card>
           ))}
         </div>
 
         {additionalProjects.length > 0 && (
           <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
             {additionalProjects.map((project) => (
-              <a
+              <Button
+                asChild
                 key={project.id}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-lg border border-border/70 bg-background p-4 shadow-sm transition-colors hover:border-foreground/20"
+                variant="ghost"
+                className="group block h-full w-full whitespace-normal p-0 text-left hover:bg-transparent"
               >
-                <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                  {project.category}
-                </p>
-                <h3 className="mt-3 font-semibold leading-6">{project.title}</h3>
-                <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
-                  {project.outcome}
-                </p>
-              </a>
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                  <Card className="h-full gap-3 border-border/70 bg-background p-4 py-4 transition-colors group-hover:border-foreground/20">
+                    <Badge variant="outline">{project.category}</Badge>
+                    <CardTitle>
+                      <h3 className="leading-6">{project.title}</h3>
+                    </CardTitle>
+                    <CardDescription className="line-clamp-2 leading-6">
+                      {project.outcome}
+                    </CardDescription>
+                  </Card>
+                </a>
+              </Button>
             ))}
           </div>
         )}

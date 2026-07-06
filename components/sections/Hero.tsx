@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, Calendar, Sparkles } from "lucide-react"
 import Image from "next/image"
 import avatarImage from "@/public/avatar.jpeg"
@@ -22,10 +24,10 @@ export function Hero() {
 
             <div className="container mx-auto grid min-h-[calc(100svh-9rem)] content-center px-4 py-14 sm:py-20">
                 <div className="max-w-5xl space-y-8">
-                    <div className="inline-flex items-center gap-2 rounded-md border border-border/80 bg-background/70 px-3 py-2 text-sm text-muted-foreground shadow-sm backdrop-blur">
+                    <Badge variant="outline" className="rounded-md bg-background/70 px-3 py-2 text-sm font-normal text-muted-foreground shadow-sm backdrop-blur">
                         <Sparkles className="size-4 text-emerald-600 dark:text-emerald-400" />
                         AI consulting for founders, product teams, and automation-heavy businesses
-                    </div>
+                    </Badge>
 
                     <div className="space-y-5">
                         <h1 className="max-w-4xl text-5xl font-semibold tracking-normal text-balance sm:text-6xl lg:text-7xl">
@@ -57,13 +59,15 @@ export function Hero() {
 
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                         {proofStats.map((stat) => (
-                            <div
+                            <Card
                                 key={stat.label}
-                                className="rounded-lg border border-border/70 bg-background/75 p-4 shadow-sm backdrop-blur"
+                                className="gap-0 border-border/70 bg-background/75 py-0 backdrop-blur"
                             >
-                                <p className="text-3xl font-semibold text-foreground">{stat.value}</p>
-                                <p className="mt-1 text-sm leading-5 text-muted-foreground">{stat.label}</p>
-                            </div>
+                                <CardContent className="p-4">
+                                    <p className="text-3xl font-semibold text-foreground">{stat.value}</p>
+                                    <p className="mt-1 text-sm leading-5 text-muted-foreground">{stat.label}</p>
+                                </CardContent>
+                            </Card>
                         ))}
                     </div>
                 </div>

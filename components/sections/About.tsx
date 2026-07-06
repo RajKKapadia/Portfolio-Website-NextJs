@@ -1,5 +1,6 @@
 import { BadgeCheck, GraduationCap, UsersRound } from "lucide-react"
 import { credibilityNotes } from "@/lib/data/profile"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function About() {
     const pillars = [
@@ -38,20 +39,28 @@ export function About() {
 
                     <div className="grid gap-4">
                         {credibilityNotes.map((note) => (
-                            <div key={note} className="rounded-lg border border-border/70 bg-background p-5 shadow-sm">
-                                <p className="leading-7 text-muted-foreground">{note}</p>
-                            </div>
+                            <Card key={note} className="border-border/70 bg-background py-0">
+                                <CardContent className="p-5">
+                                    <p className="leading-7 text-muted-foreground">{note}</p>
+                                </CardContent>
+                            </Card>
                         ))}
                     </div>
                 </div>
 
                 <div className="mt-10 grid gap-4 md:grid-cols-3">
                     {pillars.map((pillar) => (
-                        <div key={pillar.label} className="rounded-lg border border-border/70 bg-background p-5 shadow-sm">
-                            <pillar.icon className="mb-4 size-6 text-teal-700 dark:text-teal-400" />
-                            <h3 className="text-lg font-semibold">{pillar.label}</h3>
-                            <p className="mt-2 leading-7 text-muted-foreground">{pillar.value}</p>
-                        </div>
+                        <Card key={pillar.label} className="gap-0 border-border/70 bg-background py-0">
+                            <CardHeader className="gap-4 p-5 pb-0">
+                                <pillar.icon className="size-6 text-teal-700 dark:text-teal-400" />
+                                <CardTitle>
+                                    <h3 className="text-lg">{pillar.label}</h3>
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent className="p-5 pt-2">
+                                <p className="leading-7 text-muted-foreground">{pillar.value}</p>
+                            </CardContent>
+                        </Card>
                     ))}
                 </div>
             </div>

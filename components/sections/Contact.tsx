@@ -1,6 +1,7 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
+import { Item, ItemActions, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -107,19 +108,29 @@ export function Contact() {
               </Button>
               <div className="grid gap-3">
                 {contactLinks.map((link) => (
-                  <a
+                  <Item
+                    asChild
                     key={link.href}
-                    href={link.href}
-                    target={link.href.startsWith('mailto') ? undefined : '_blank'}
-                    rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                    className="flex items-center justify-between rounded-md border border-border/70 bg-muted/25 px-4 py-3 text-sm text-foreground transition-colors hover:bg-accent"
+                    variant="outline"
+                    size="sm"
+                    className="bg-muted/25"
                   >
-                    <span className="flex items-center gap-3">
-                      <link.icon className="size-5" />
-                      {link.text}
-                    </span>
-                    <ArrowUpRight className="size-4" />
-                  </a>
+                    <a
+                      href={link.href}
+                      target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                      rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                    >
+                      <ItemMedia>
+                        <link.icon className="size-5" />
+                      </ItemMedia>
+                      <ItemContent>
+                        <ItemTitle>{link.text}</ItemTitle>
+                      </ItemContent>
+                      <ItemActions>
+                        <ArrowUpRight className="size-4" />
+                      </ItemActions>
+                    </a>
+                  </Item>
                 ))}
               </div>
             </CardContent>

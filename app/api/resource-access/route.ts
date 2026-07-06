@@ -3,10 +3,11 @@ import { saveLead } from "@/lib/sheets"
 import { z } from "zod"
 
 const requestSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  resourceId: z.string(),
-  resourceTitle: z.string(),
+  name: z.string().trim().min(2).max(100),
+  email: z.string().trim().email().max(320),
+  resourceId: z.string().trim().min(1).max(200),
+  resourceTitle: z.string().trim().min(1).max(500),
+  marketingConsent: z.boolean(),
 })
 
 export async function POST(request: NextRequest) {
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { name, email, resourceId, resourceTitle } = validation.data
+    const { name, email, resourceId, resourceTitle, marketingConsent } = validation.data
 
     // Save lead to Google Sheets
     const success = await saveLead({
@@ -30,6 +31,7 @@ export async function POST(request: NextRequest) {
       email,
       resourceId,
       resourceTitle,
+      marketingConsent,
     })
 
     if (success) {

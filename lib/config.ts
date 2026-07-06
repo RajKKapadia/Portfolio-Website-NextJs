@@ -1,12 +1,16 @@
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "") ||
+  "http://localhost:3000"
+
 export const config = {
+  siteUrl: siteUrl.replace(/\/+$/, ""),
   youtube: {
     apiKey: process.env.YOUTUBE_API_KEY || "",
     apiReferer:
       process.env.YOUTUBE_API_REFERER ||
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      process.env.SITE_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "") ||
-      "http://localhost:3000",
+      siteUrl,
     channelId: "UCOT01XvBSj12xQsANtTeAcQ",
     maxResults: 10
   },
@@ -18,7 +22,8 @@ export const config = {
     spreadsheetId: process.env.GOOGLE_SHEET_ID || "",
     serviceAccountJson: process.env.GCP_SERVICE_ACCOUNT_JSON || "",
     resourcesSheet: "Code Data",
-    leadsSheet: "Leads"
+    leadsSheet: "Leads",
+    subscribersSheet: "Subscribers"
   }
 } as const
 

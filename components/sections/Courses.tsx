@@ -1,4 +1,12 @@
-import { Card, CardContent } from "@/components/ui/card"
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { courses } from "@/lib/data/courses"
 import { ArrowUpRight, Star, Users } from "lucide-react"
 import Image from "next/image"
@@ -20,7 +28,7 @@ export function Courses() {
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                     {courses.map((course) => (
                         <Card key={course.id} className="group h-full overflow-hidden border-border/70 bg-muted/25 p-0 shadow-sm">
-                            <div className="relative aspect-video overflow-hidden">
+                            <AspectRatio ratio={16 / 9} className="relative overflow-hidden">
                                 <Image
                                     src={course.image}
                                     alt={course.title}
@@ -29,15 +37,17 @@ export function Courses() {
                                     sizes="(min-width: 768px) 50vw, 100vw"
                                     placeholder="blur"
                                 />
-                            </div>
-                            <CardContent className="flex flex-1 flex-col p-5 sm:p-6">
-                                <h3 className="text-2xl font-semibold tracking-normal">
-                                    {course.title}
-                                </h3>
-                                <p className="mt-3 flex-1 leading-7 text-muted-foreground">
+                            </AspectRatio>
+                            <CardHeader className="p-5 pb-0 sm:p-6 sm:pb-0">
+                                <CardTitle>
+                                    <h3 className="text-2xl tracking-normal">{course.title}</h3>
+                                </CardTitle>
+                                <CardDescription className="text-base leading-7">
                                     {course.description}
-                                </p>
-                                <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="flex flex-1 flex-col p-5 sm:p-6">
+                                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                                     <div className="flex items-center gap-1.5">
                                         <Users className="size-4" />
                                         <span>{course.students.toLocaleString()} students</span>
@@ -49,13 +59,15 @@ export function Courses() {
                                         </span>
                                     </div>
                                 </div>
+                            </CardContent>
+                            <CardFooter className="p-5 pt-0 sm:p-6 sm:pt-0">
                                 <Button asChild className="mt-6 w-full">
                                     <a href={course.url} target="_blank" rel="noopener noreferrer">
                                         View course
                                         <ArrowUpRight className="size-4" />
                                     </a>
                                 </Button>
-                            </CardContent>
+                            </CardFooter>
                         </Card>
                     ))}
                 </div>

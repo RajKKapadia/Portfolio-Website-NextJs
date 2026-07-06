@@ -1,5 +1,7 @@
 import { expertiseGroups } from "@/lib/data/profile"
 import { Boxes, Cloud, Cpu, Workflow } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function Skills() {
     const icons = [Workflow, Cpu, Cloud, Boxes]
@@ -21,20 +23,21 @@ export function Skills() {
                         const Icon = icons[index] ?? Boxes
 
                         return (
-                            <article key={category.title} className="rounded-lg border border-border/70 bg-muted/25 p-5">
-                                <Icon className="mb-4 size-6 text-foreground" />
-                                <h3 className="text-xl font-semibold">{category.title}</h3>
-                                <div className="mt-5 flex flex-wrap gap-2">
+                            <Card key={category.title} role="article" className="gap-0 border-border/70 bg-muted/25 py-0">
+                                <CardHeader className="gap-4 p-5 pb-0">
+                                    <Icon className="size-6 text-foreground" />
+                                    <CardTitle>
+                                        <h3 className="text-xl">{category.title}</h3>
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex flex-wrap gap-2 p-5">
                                     {category.skills.map((skill) => (
-                                        <span
-                                            key={skill}
-                                            className="rounded-md border border-border/70 bg-background px-2.5 py-1.5 text-sm text-muted-foreground"
-                                        >
+                                        <Badge key={skill} variant="outline" className="bg-background py-1.5 text-muted-foreground">
                                             {skill}
-                                        </span>
+                                        </Badge>
                                     ))}
-                                </div>
-                            </article>
+                                </CardContent>
+                            </Card>
                         )
                     })}
                 </div>
