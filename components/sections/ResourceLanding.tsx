@@ -58,7 +58,7 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
     defaultValues: {
       name: "",
       email: "",
-      marketingConsent: false,
+      marketingConsent: true,
     },
   })
 
