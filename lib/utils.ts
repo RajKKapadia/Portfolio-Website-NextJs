@@ -16,6 +16,39 @@ export function formatViewCount(viewCount: string): string {
   return viewCount
 }
 
+const YOUTUBE_VIDEO_ID_PATTERN = /^[a-zA-Z0-9_-]{11}$/
+
+export function getYouTubeVideoId(url: string): string | null {
+  if (!url.trim()) return null
+
+  try {
+    const parsedUrl = new URL(url)
+    const hostname = parsedUrl.hostname.toLowerCase()
+    let videoId = ""
+
+    if (hostname === "youtu.be" || hostname.endsWith(".youtu.be")) {
+      videoId = parsedUrl.pathname.split("/").filter(Boolean)[0] ?? ""
+    } else if (
+      hostname === "youtube.com" ||
+      hostname.endsWith(".youtube.com") ||
+      hostname === "youtube-nocookie.com" ||
+      hostname.endsWith(".youtube-nocookie.com")
+    ) {
+      const pathParts = parsedUrl.pathname.split("/").filter(Boolean)
+
+      if (pathParts[0] === "watch") {
+        videoId = parsedUrl.searchParams.get("v") ?? ""
+      } else if (["embed", "live", "shorts"].includes(pathParts[0])) {
+        videoId = pathParts[1] ?? ""
+      }
+    }
+
+    return YOUTUBE_VIDEO_ID_PATTERN.test(videoId) ? videoId : null
+  } catch {
+    return null
+  }
+}
+
 /**
  * Converts a Google Drive sharing URL to a direct image URL
  * @param url - Google Drive sharing URL (e.g., https://drive.google.com/file/d/FILE_ID/view?usp=sharing)
