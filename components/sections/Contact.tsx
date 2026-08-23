@@ -15,9 +15,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { toast } from "sonner"
 import { sendTelegramMessage } from "@/lib/telegram"
 import { profile } from "@/lib/data/profile"
+import { personNameSchema } from "@/lib/validation"
 
 export const inquiryFormSchema = z.object({
-  name: z.string().min(1, "Required"),
+  name: personNameSchema,
   email: z.string().email().min(1, "Required"),
   subject: z.string(),
   message: z.string().optional()

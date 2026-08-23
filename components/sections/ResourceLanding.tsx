@@ -30,6 +30,7 @@ import { toast } from "sonner"
 import type { Resource } from "@/lib/sheets"
 import { MARKETING_CONSENT_COPY } from "@/lib/marketing"
 import { getYouTubeVideoId } from "@/lib/utils"
+import { personNameSchema } from "@/lib/validation"
 import { ArrowRight, ArrowUpRight, CheckCircle2, Code2, LockKeyhole, Play } from "lucide-react"
 import { YoutubeIcno } from "../icons"
 
@@ -45,7 +46,7 @@ const RESOURCE_BENEFITS = [
 ]
 
 const leadFormSchema = z.object({
-  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100),
+  name: personNameSchema,
   email: z.string().trim().email("Please enter a valid email address").max(320),
   marketingConsent: z.boolean(),
 })

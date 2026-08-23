@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 import { saveLead } from "@/lib/sheets"
+import { personNameSchema } from "@/lib/validation"
 import { z } from "zod"
 
 const requestSchema = z.object({
-  name: z.string().trim().min(2).max(100),
+  name: personNameSchema,
   email: z.string().trim().email().max(320),
   resourceId: z.string().trim().min(1).max(200),
   resourceTitle: z.string().trim().min(1).max(500),
