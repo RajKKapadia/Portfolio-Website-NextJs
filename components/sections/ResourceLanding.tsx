@@ -29,7 +29,8 @@ import { Item, ItemContent, ItemMedia, ItemTitle } from "@/components/ui/item"
 import { toast } from "sonner"
 import type { Resource } from "@/lib/sheets"
 import { MARKETING_CONSENT_COPY } from "@/lib/marketing"
-import { ArrowRight, CheckCircle2, Code2, LockKeyhole } from "lucide-react"
+import { getYouTubeVideoId } from "@/lib/utils"
+import { ArrowRight, ArrowUpRight, CheckCircle2, Code2, LockKeyhole, Play } from "lucide-react"
 import { YoutubeIcno } from "../icons"
 
 interface ResourceLandingProps {
@@ -52,6 +53,7 @@ const leadFormSchema = z.object({
 export default function ResourceLanding({ resource }: ResourceLandingProps) {
   const [isPending, startTransition] = useTransition()
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const youtubeVideoId = getYouTubeVideoId(resource.youtubeUrl)
 
   const form = useForm<z.infer<typeof leadFormSchema>>({
     resolver: zodResolver(leadFormSchema),
@@ -111,16 +113,48 @@ export default function ResourceLanding({ resource }: ResourceLandingProps) {
       <div className="container mx-auto px-4 py-10 lg:py-14">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div className="space-y-8">
-            <AspectRatio ratio={16 / 9} className="relative overflow-hidden rounded-lg border">
-              <Image
-                src={resource.thumbnailUrl}
-                alt={resource.title}
-                fill
-                className="object-cover"
-                priority
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </AspectRatio>
+            {youtubeVideoId ? (
+              <AspectRatio
+                ratio={16 / 9}
+                className="group relative overflow-hidden rounded-lg border bg-black"
+              >
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}?controls=0&modestbranding=1&rel=0`}
+                  title={`${resource.title} video preview`}
+                  className="pointer-events-none absolute inset-0 size-full"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  tabIndex={-1}
+                />
+                <a
+                  href={resource.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Watch ${resource.title} on YouTube in a new tab`}
+                  className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors hover:bg-black/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+                >
+                  <span className="flex size-16 items-center justify-center rounded-full bg-red-600 text-white shadow-lg transition-transform group-hover:scale-105">
+                    <Play className="size-7 fill-current" aria-hidden="true" />
+                  </span>
+                  <span className="absolute right-4 bottom-4 flex items-center gap-1.5 rounded-md bg-black/80 px-3 py-2 text-sm font-medium text-white">
+                    Watch on YouTube
+                    <ArrowUpRight className="size-4" aria-hidden="true" />
+                  </span>
+                </a>
+              </AspectRatio>
+            ) : (
+              <AspectRatio ratio={16 / 9} className="relative overflow-hidden rounded-lg border">
+                <Image
+                  src={resource.thumbnailUrl}
+                  alt={resource.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+              </AspectRatio>
+            )}
 
             <Card className="gap-0 border-border/70 bg-muted/25 py-0">
               <CardHeader className="p-5 pb-0 sm:p-6 sm:pb-0">
