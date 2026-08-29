@@ -6,9 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { ArrowUpRight, BriefcaseBusiness, Calendar, Factory, Mail, Send } from "lucide-react"
+import { ArrowUpRight, BriefcaseBusiness, Building2, Calendar, Factory, Globe2, Mail, MessageCircleMore, Send } from "lucide-react"
 import { useTransition } from "react"
-import { YoutubeIcno } from "../icons"
+import { XIcon, YoutubeIcno } from "../icons"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
@@ -53,6 +53,26 @@ export function Contact() {
     }
 
     const contactLinks = [
+        {
+            icon: Globe2,
+            href: profile.websiteUrl,
+            text: "Personal Website"
+        },
+        {
+            icon: Building2,
+            href: profile.companyUrl,
+            text: "TrishiAI"
+        },
+        {
+            icon: MessageCircleMore,
+            href: profile.calorieBuddyUrl,
+            text: "Calorie Buddy AI"
+        },
+        {
+            icon: XIcon,
+            href: profile.xUrl,
+            text: "X / @RaajKapadia"
+        },
         {
             icon: Mail,
             href: `mailto:${profile.email}`,

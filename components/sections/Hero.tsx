@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Calendar, Sparkles } from "lucide-react"
+import { ArrowRight, Building2, Calendar, MessageCircleMore, Sparkles } from "lucide-react"
 import Image from "next/image"
 import avatarImage from "@/public/avatar.jpeg"
 import { GithubIcon } from "../icons"
@@ -34,19 +34,31 @@ export function Hero() {
                             Raj Kapadia
                         </h1>
                         <p className="max-w-3xl text-xl font-medium text-foreground sm:text-2xl">
-                            Senior AI/LLM engineer building agents, chatbots, and full-stack AI products that survive real users.
+                            {profile.title}
                         </p>
                         <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-                            I help teams turn AI prototypes into reliable workflows across WhatsApp, Telegram, web apps, databases, and cloud infrastructure.
+                            I build production AI agents, conversational systems, and full-stack products—and help teams turn AI prototypes into reliable workflows across WhatsApp, Telegram, web apps, databases, and cloud infrastructure.
                         </p>
                     </div>
 
-                    <div className="flex flex-col gap-3 sm:flex-row">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                         <Button asChild size="lg">
                             <a href={profile.bookingUrl} target="_blank" rel="noopener noreferrer">
                                 <Calendar className="size-5" />
                                 Book consulting call
                                 <ArrowRight className="size-4" />
+                            </a>
+                        </Button>
+                        <Button asChild size="lg" variant="outline">
+                            <a href={profile.calorieBuddyUrl} target="_blank" rel="noopener noreferrer">
+                                <MessageCircleMore className="size-5" />
+                                Calorie Buddy AI
+                            </a>
+                        </Button>
+                        <Button asChild size="lg" variant="outline">
+                            <a href={profile.companyUrl} target="_blank" rel="noopener noreferrer">
+                                <Building2 className="size-5" />
+                                Visit TrishiAI
                             </a>
                         </Button>
                         <Button asChild size="lg" variant="outline">

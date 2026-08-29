@@ -1,12 +1,17 @@
 export const profile = {
   name: "Raj Kapadia",
-  title: "AI/ML Team Lead | LLM Specialist | Full-Stack Developer",
+  title: "AI Agent & Applied LLM Engineer | Founder of TrishiAI | Creator of Calorie Buddy AI",
   location: "India",
   email: "raajforyou@gmail.com",
+  websiteUrl: "https://rajkapadia.com",
+  companyUrl: "https://trishiai.com",
+  calorieBuddyUrl: "https://caloriebuddy.trishiai.com",
+  calorieBuddyBotUrl: "https://t.me/CalorieBuddyAI_Bot",
   bookingUrl: "https://topmate.io/raj_kapadia/522909",
   alternateBookingUrl:
     "https://project-easy-meet.vercel.app/book/user_2rWmQLgVF13473zu2Mir3l0Yefx/fcf110c4-d28f-44d4-9d40-6e35f2a7f070",
   githubUrl: "https://github.com/RajKKapadia",
+  xUrl: "https://x.com/RaajKapadia",
   youtubeUrl: "https://www.youtube.com/channel/UCOT01XvBSj12xQsANtTeAcQ",
   upworkUrl: "https://www.upwork.com/freelancers/~0176aeacfcff7f1fc2?viewMode=1",
   fiverrUrl: "https://www.fiverr.com/rajkkapadia",
@@ -94,6 +99,7 @@ export const expertiseGroups = [
 ] as const
 
 export const credibilityNotes = [
+  "Founded TrishiAI for production AI-agent and conversational-product delivery, and created Calorie Buddy AI as a live Telegram-first product.",
   "Led a 5-person AI/ML engineering team building enterprise LLM, text-to-SQL, image search, and deep learning products.",
   "Delivered chatbot and automation projects for clients worldwide through freelance marketplaces and direct consulting.",
   "Brings teaching depth from 6+ years as an Assistant Professor, plus practical production delivery across AI and web stacks.",

@@ -47,3 +47,29 @@ export const GithubIcon = ({
     </svg>
   )
 }
+
+export const XIcon = ({
+  width = 24,
+  height = 24,
+  color = 'currentColor',
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M4 4l16 16" />
+      <path d="M20 4L4 20" />
+    </svg>
+  )
+}
