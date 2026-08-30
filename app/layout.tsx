@@ -17,8 +17,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Raj Kapadia - AI/LLM Consultant and Full-Stack AI Engineer',
-  description: 'Raj Kapadia builds production-ready AI agents, LLM applications, chatbots, and full-stack AI products for teams that need reliable automation.'
+  title: 'Raj Kapadia - AI Agent Engineer, TrishiAI Founder and Calorie Buddy AI Creator',
+  description: 'Raj Kapadia builds production-ready AI agents, conversational systems, and full-stack AI products. Founder of TrishiAI and creator of Calorie Buddy AI.',
+  alternates: {
+    canonical: 'https://rajkapadia.com',
+  },
+  twitter: {
+    card: 'summary',
+    creator: '@RaajKapadia',
+    title: 'Raj Kapadia - AI Agent and Applied LLM Engineer',
+    description: 'Founder of TrishiAI and creator of Calorie Buddy AI, building production AI agents and full-stack LLM products.',
+  },
 }
 
 export default function RootLayout({
